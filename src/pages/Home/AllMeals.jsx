@@ -6,12 +6,12 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { Loader } from "../../components/Ui/loader";
 
 function AllMeals() {
-    const [alphabet, setAlphabet] = useState(65);
+    const [alphabet, setAlphabet] = useState(97);
     const [mealData, setMealData] = useState([]);
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        setAlphabet(65);
+        setAlphabet(97);
         fetchInitialData();
     }, [])
 
@@ -28,7 +28,6 @@ function AllMeals() {
             })
     }
     function fetchNextData() {
-        setLoading(true);
         fetchApiData(`search.php?f=${String.fromCharCode(alphabet)}`)
             .then((res) => {
                 if (mealData?.length) {
@@ -39,7 +38,6 @@ function AllMeals() {
             })
             .then(() => {
                 setAlphabet((prev) => prev + 1);
-                setLoading(false);
             })
             .catch((err) => {
                 console.log(err);
@@ -47,31 +45,29 @@ function AllMeals() {
     }
 
     return (
-        <section className="w-full mt-10 py-8">
+        <section className="text-black w-full mt-16">
             <Wrapper>
-                <p className="text-3xl mb-8 font-normal">Find Here All Meals</p>
-                {
-                    loading && <Loader />
-                }
-                {/* <div className="flex items-start justify-center flex-row flex-wrap gap-8"> */}
-                {
-                    mealData?.length &&
-                    <InfiniteScroll
-                        className="flex items-start justify-center flex-row flex-wrap gap-8"
-                        dataLength={mealData?.length || 0}
-                        next={fetchNextData}
-                        hasMore={alphabet <= 122}
-                        loader={<Loader />}
-                    >
-                        {
-                            mealData?.map((meal) => {
-                                return <Card key={meal.idMeal} mealData={meal} />
-                            })
-                        }
+                <p className="text-3xl mb-4 font-normal">Find All Meals Here</p>
+                <div className="w-full">
+                    {loading && <Loader initial={true} />}
+                    {
+                        !loading &&
+                        <InfiniteScroll
+                            className="flex pt-4 items-start justify-center flex-row flex-wrap gap-4"
+                            dataLength={mealData?.length || 0}
+                            next={fetchNextData}
+                            hasMore={alphabet <= 111}
+                            loader={<Loader />}
+                        >
+                            {
+                                mealData?.map((meal) => {
+                                    return <Card key={meal.idMeal} mealData={meal} />
+                                })
+                            }
 
-                    </InfiniteScroll>
-                }
-                {/* </div> */}
+                        </InfiniteScroll>
+                    }
+                </div>
             </Wrapper>
         </section>
     )
