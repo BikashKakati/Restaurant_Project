@@ -6,7 +6,7 @@ function HeroSection() {
             <img src={heroPoster} alt="heroPoster" className="h-full w-full object-center object-cover absolute top-0 right-0" />
             <div className="z-10 flex justify-center items-center flex-col gap-y-8 w-full">
                 <strong className="text-7xl">FoodAuto</strong>
-                <p className="text-4xl font-normal">Discover the best food & drinks</p>
+                <p className="text-4xl font-normal">Discover the best food & drinks All over the World</p>
                 <SearchBar/>
             </div>
         </header>

@@ -16,9 +16,8 @@ function Carousel() {
                 <Swiper
                     modules={[Navigation, Pagination]}
                     slidesPerView={"auto"}
-                    loop
                     navigation={{ clickable: true }}
-                    spaceBetween={20}>
+                    spaceBetween={40}>
                     {
                         loading ?
                             (<h1>loading...</h1>)
