@@ -1,5 +1,5 @@
 import heroPoster from "../../assets/heroPoster.jpg"
-import SearchBar from "./SearchBar";
+import SearchSection from "./SearchBar/SearchSection";
 function HeroSection() {
     return (
         <header className="h-128 w-full mb-10 relative flex justify-center items-center flex-col text-white">
@@ -7,7 +7,7 @@ function HeroSection() {
             <div className="z-10 flex justify-center items-center flex-col gap-y-8 w-full">
                 <strong className="text-7xl">FoodAuto</strong>
                 <p className="text-4xl font-normal">Discover the best food & drinks All over the World</p>
-                <SearchBar/>
+                <SearchSection/>
             </div>
         </header>
     )

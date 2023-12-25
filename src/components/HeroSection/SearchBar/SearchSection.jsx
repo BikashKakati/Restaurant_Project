@@ -1,11 +1,16 @@
-import { useFetch } from "../../hook/useFetch"
+import { useState } from "react";
+import { useFetch } from "../../../hook/useFetch"
 import {MapPinIcon} from "@heroicons/react/24/solid"
-import {MagnifyingGlassIcon} from "@heroicons/react/24/outline"
+import SearchResultCard from "./SearchResultCard";
+import SearchBar from "./SearchBar";
 
-function SearchBar(){
+function SearchSection(){
     const {data, loading} = useFetch("list.php?a=list");
+    const [query, setQuery] = useState("");
+    const {data:searchResults, loading:searching} = useFetch(`filter.php?c=${query}`);
+
     return(
-        <div className="flex items-center text-slate-500 h-12 bg-white rounded-xl">
+        <div className="relative flex items-center text-slate-500 h-12 bg-white rounded-xl">
             <div className="h-full w-64 rounded-xl flex items-center">
                 <MapPinIcon className="h-6 w-6 ml-2 text-red-500"/>
                 <select className="w-full h-full px-3 py-2 rounded-xl outline-0">
@@ -17,11 +22,13 @@ function SearchBar(){
                 </select>
             </div>
             <div className="w-0.5 h-6 bg-zinc-300"></div>
-            <div className="h-full w-128 rounded-xl flex items-center">
-                <MagnifyingGlassIcon className="h-5 w-5 ml-2 text-zinc-500" />
-                <input type="text" placeholder="search by name...." className="w-full h-full px-3 py-2 rounded-xl outline-0"/>
-            </div>
+            <SearchBar setQuery = {setQuery}/>
+            {
+                searchResults.meals?.length && 
+                (<SearchResultCard searchResults = {searchResults.meals}/>)
+            }
+            
         </div>
     )
 }
-export default SearchBar
+export default SearchSection
