@@ -3,11 +3,12 @@ import { Navigation, Pagination } from 'swiper/modules';
 import 'swiper/css/bundle';
 import Wrapper from "../Ui/Wrapper";
 import CarouselCard from "./CarouselCard";
+import CarouselSkeleton from "./CarouselSkeleton"
 import { useFetch } from "../../hook/useFetch";
 
 
 function Carousel() {
-    const {data,loading} = useFetch("categories.php");
+    const { data, loading } = useFetch("categories.php");
 
     return (
         <section className="text-black bg-zinc-100 min-h-72 w-full py-8">
@@ -20,7 +21,15 @@ function Carousel() {
                     spaceBetween={40}>
                     {
                         loading ?
-                            (<h1>loading...</h1>)
+                            (
+                                <div className="flex overflow-hidden flex-nowrap gap-10">
+                                    <CarouselSkeleton />
+                                    <CarouselSkeleton />
+                                    <CarouselSkeleton />
+                                    <CarouselSkeleton />
+                                    <CarouselSkeleton />
+                                </div>
+                            )
                             :
                             (
                                 <>
@@ -28,7 +37,7 @@ function Carousel() {
                                         data?.categories?.map((category) => {
                                             return (
                                                 <SwiperSlide className="w-44" key={category?.idCategory} >
-                                                    <CarouselCard cardData = {category}/>
+                                                    <CarouselCard cardData={category} />
                                                 </SwiperSlide>
                                             )
                                         })
