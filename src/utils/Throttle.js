@@ -4,9 +4,9 @@ export function throttle(callback, delay){
         if(allowed){
             callback.apply(this,[...args]);
             allowed = false;
+            setTimeout(()=>{
+                allowed = true;
+            },delay)
         }
-        setTimeout(()=>{
-            allowed = true;
-        },delay)
     }
 }
