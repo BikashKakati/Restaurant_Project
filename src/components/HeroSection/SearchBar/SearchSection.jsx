@@ -1,33 +1,53 @@
-import { useState } from "react";
-import { useFetch } from "../../../hook/useFetch"
-import {MapPinIcon} from "@heroicons/react/24/solid"
-import SearchResultCard from "./SearchResultCard";
-import SearchBar from "./SearchBar";
+// FIX ME --> Debounce cannot work properly..
+// FEATURE ---> Search reslut box display all results. made a show less button
 
-function SearchSection(){
-    const {data, loading} = useFetch("list.php?a=list");
+import { useEffect, useState } from "react";
+import SearchResultCard from "./SearchResult/SearchResultCard";
+import SearchBar from "./SearchInputs/SearchBar";
+import { fetchApiData } from "../../../services/Api";
+import SelectOptionBar from "./SearchInputs/SelectOptionBar";
+
+function SearchSection() {
     const [query, setQuery] = useState("");
-    const {data:searchResults, loading:searching} = useFetch(`filter.php?c=${query}`);
+    const [searching, setSearching] = useState(false);
+    const [searchResults, setSearchResult] = useState([]);
 
-    return(
+
+    useEffect(() => {
+        let subscribe = true;
+        if(subscribe && query){
+            fetchSearchData(query)
+            .then((data)=>setSearchResult(data))
+        }else{
+            setSearchResult([]);
+        }
+        setSearching(false);
+
+        return()=>{subscribe = false}
+    }, [query])
+
+    async function fetchSearchData(queryData) {
+        try {
+            const res = await fetchApiData(`filter.php?c=${queryData}`);
+            return res;
+        } catch (err) {
+            console.log(err, "error in searching data")
+        }
+    }
+
+    return (
         <div className="relative flex items-center text-slate-500 h-12 bg-white rounded-xl">
-            <div className="h-full w-64 rounded-xl flex items-center">
-                <MapPinIcon className="h-6 w-6 ml-2 text-red-500"/>
-                <select className="w-full h-full px-3 py-2 rounded-xl outline-0">
-                    {
-                        !loading && data?.meals?.map((place,index)=>{
-                            return <option key={index} value={place.strArea}>{place.strArea}</option>
-                        })
-                    }
-                </select>
-            </div>
+            <SelectOptionBar setSearchResult={setSearchResult} setSearching={setSearching}/>
             <div className="w-0.5 h-6 bg-zinc-300"></div>
-            <SearchBar setQuery = {setQuery}/>
+            <SearchBar setQuery={setQuery} setSearching={setSearching} setSearchResult={setSearchResult}/>
             {
-                searchResults.meals?.length && 
-                (<SearchResultCard searchResults = {searchResults.meals}/>)
+                searching && (<SearchResultCard searching={searching} />)
             }
-            
+            {
+                searchResults.meals?.length &&
+                (<SearchResultCard searchResults={searchResults.meals} />)
+            }
+
         </div>
     )
 }
