@@ -1,20 +1,20 @@
+import Navbar from "./components/Navbar/Navbar"
 import MealDetails from "./pages/Details/MealDetails"
 import ExploreCategory from "./pages/ExploreCategory/ExploreCategory"
 import Home from "./pages/Home/Home"
-import { BrowserRouter as Router, Routes, Route} from "react-router-dom"
+import { Routes, Route } from "react-router-dom"
 
 
-function App(){
+function App() {
   return (
-    <>
-    <Router>
-      <Routes>
-        <Route path="/" element={<Home/>}/>
-        <Route path="/details/:id" element={<MealDetails/>}/>
-        <Route path="/categories/:catvarient" element={<ExploreCategory/>}/>
-      </Routes>
-    </Router>
-    </>
+    <div className="bg-slate-50 relative w-full min-h-dvh">
+      <Navbar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/details/:id" element={<MealDetails />} />
+          <Route path="/categories/:catvarient" element={<ExploreCategory />} />
+        </Routes>
+    </div>
   )
 }
 export default App
