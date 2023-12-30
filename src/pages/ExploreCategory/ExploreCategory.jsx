@@ -8,7 +8,7 @@ function ExploreCategory() {
     const { catvarient } = useParams();
     const { data, loading } = useFetch(`filter.php?c=${catvarient}`);
     return (
-        <div className="w-full mt-10 min-w-dvh">
+        <div className="w-full h-full pt-20">
             <Wrapper >
                 <p className="text-3xl mb-4 font-normal">All {catvarient} items is here</p>
                 <div className="flex pt-4 items-start justify-center flex-row flex-wrap gap-4">

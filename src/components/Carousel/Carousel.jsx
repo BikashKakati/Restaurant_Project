@@ -11,7 +11,7 @@ function Carousel() {
     const { data, loading } = useFetch("categories.php");
 
     return (
-        <section className="text-black bg-zinc-100 min-h-72 w-full py-8">
+        <section className="text-black bg-zinc-200 min-h-72 w-full py-8">
             <Wrapper className="h-full">
                 <p className="text-3xl mb-8 font-normal">Categories for you</p>
                 <Swiper

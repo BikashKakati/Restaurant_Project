@@ -9,7 +9,7 @@ function Card({ mealData, cat}) {
         <Link to={`/details/${id}`}>
             <div className="h-96 w-80 p-4 rounded-2xl hover:shadow-custom">
                 <div className="h-72 w-full">
-                    <LazyLoadImg src={imageLink} alt={name} className="w-full h-full object-cover object-center rounded-2xl" />
+                    <LazyLoadImg src={imageLink} alt={name} className="object-cover object-center rounded-2xl" />
                 </div>
                 <div className="w-ful">
                     <p className="text-lg font-medium">{name ? name : "name"}</p>

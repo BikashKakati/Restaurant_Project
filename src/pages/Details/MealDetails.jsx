@@ -15,13 +15,13 @@ function MealDetails() {
 
     return (
 
-        <div className="w-full min-h-dvh my-10">
+        <div className="w-full h-full pt-20">
             {loading && <Loader initial={true}/>}
             {
                 !loading &&
                 <Wrapper className="min-h-96 flex items-start flex-col justify-center gap-10">
-                    <div className="w-145 h-128 my-2 mx-auto basis-full shadow-custom rounded-xl">
-                        <img src={image} alt={name} className="h-128 w-full object-cover object-center rounded-xl" />
+                    <div className="max-w-145 w-full my-2 mx-auto basis-full shadow-custom rounded-xl">
+                        <img src={image} alt={name} className="h-96 w-full object-cover object-center rounded-xl" />
                     </div>
                     <div className="">
                         <p className="text-3xl font-medium">{name}</p>

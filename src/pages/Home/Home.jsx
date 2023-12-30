@@ -6,7 +6,7 @@ import AllMeals from "./AllMeals";
 
 function Home() {
     return (
-        <div className="w-full min-h-dvh">
+        <div className="w-full h-full">
             <HeroSection />
             <Carousel/>
             <AllMeals/>
