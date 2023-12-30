@@ -4,7 +4,7 @@ import SearchResultSkeleton from "./SearchResultSkeleton";
 
 function SearchResultCard({ searchResults, searching }) {
     return (
-        <div className="absolute bottom-0 left-0 translate-y-full w-full rounded-2xl bg-zinc-200 py-2 px-6 flex flex-wrap items-start justify-center gap-4 shadow-2xl">
+        <div className="absolute bottom-0 left-0 translate-y-full w-full rounded-2xl bg-zinc-200 py-2 px-4 flex flex-wrap items-start justify-center gap-4 shadow-2xl">
             {
                 searching &&
                 (
