@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom"
+import {ShoppingCartIcon} from "@heroicons/react/24/solid";
 import Wrapper from "../Ui/Wrapper"
 
 function Navbar() {
@@ -19,7 +20,7 @@ function Navbar() {
                     </NavLink>
                     <NavLink to={"#"}>
                         <li className="px-5 py-3 hover:nav-hover">
-                            Cart
+                            <ShoppingCartIcon className="h-6 w-6"/>
                         </li>
                     </NavLink>
                     <NavLink to={"#"}>

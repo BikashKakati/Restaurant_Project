@@ -10,4 +10,18 @@
     .nav-hover{
         background: rgba(236, 229, 229, 0.5);
     }
+    .cart-icon-position{
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+    }
+    .popup-animation{
+        animation: pop .5s ease-in-out;
+    }
+    @keyframes pop{
+        0%{
+            opacity: 0;
+            scale: 0;
+        }
+    }
 }
