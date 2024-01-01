@@ -7,15 +7,18 @@ export const CartContext = createContext();
 
 function ContextProvider({children}){
     const [state, dispatch] = useReducer(cartReducer, INITIAL_STATE);
-    console.log(state);
 
-    function addCartHandler(mealDetails){
-        dispatch({type:"ADDTO_CART", payload:mealDetails})
+    function addToCartHandler(mealDetails){
+        dispatch({type:"ADD_TO_CART", payload:mealDetails})
+    }
+    function removeFromCartHandler(id){
+        dispatch({type:"REMOVE_FROM_CART", payload:id})
     }
     const cartDetails = {
         cartMealsDetails : state.cartMealsDetails,
         totalPrice: state.totalPrice,
-        addCartHandler,
+        addToCartHandler,
+        removeFromCartHandler
     }
     return(
         <CartContext.Provider value={cartDetails}>

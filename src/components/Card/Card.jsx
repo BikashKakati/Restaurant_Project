@@ -3,17 +3,17 @@ import fallBackImg from "../../assets/NoImageFallback.svg.png";
 import { ShoppingCartIcon } from "@heroicons/react/24/solid";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
-import { CartContext } from "../../context/ContextProvider"
+import { CartContext } from "../../context/ContextProvider";
 
 function Card({ mealData, cat }) {
-    const { addCartHandler } = useContext(CartContext);
+    const { addToCartHandler } = useContext(CartContext);
 
     const { strMeal: name, strMealThumb: image, strCategory: category, idMeal: id } = mealData;
     const imageLink = mealData?.strMealThumb ? image : fallBackImg;
     const mealPrice = Number(id.slice(2));
 
     const handleAddToCart = () => {
-        addCartHandler({
+        addToCartHandler({
             id,
             name,
             image,
@@ -37,7 +37,7 @@ function Card({ mealData, cat }) {
                     </div>
                 </div>
             </Link>
-            <div className="hidden absolute p-5 bg-zinc-800 rounded-full cart-icon-position group-hover:block cursor-pointer popup-animation" onClick={handleAddToCart}>
+            <div className="hidden absolute p-5 bg-zinc-800 rounded-full cart-icon-position group-hover:block hover:bg-zinc-600 cursor-pointer popup-animation" onClick={handleAddToCart}>
                 <ShoppingCartIcon className="h-7 w-7 text-white" />
             </div>
         </div>

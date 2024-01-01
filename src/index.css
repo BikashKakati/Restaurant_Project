@@ -15,6 +15,10 @@
         left: 50%;
         transform: translate(-50%,-50%);
     }
+    .cart-container {
+        max-width: 40rem;
+        min-height: 28rem;
+    }
     .popup-animation{
         animation: pop .5s ease-in-out;
     }
