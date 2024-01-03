@@ -13,7 +13,7 @@ export function cartReducer(state, action) {
                     if (meals.id === action.payload.id) {
                         return {
                             ...meals,
-                            quantity: meals.quantity + 1,
+                            quantity: meals.quantity + action.payload.quantity,
                         }
                     } else {
                         return meals;
@@ -22,7 +22,7 @@ export function cartReducer(state, action) {
             } else {
                 updatedMealsDetails = [...state.cartMealsDetails, { ...action.payload }];
             }
-            const updatedTotalPrice = state.totalPrice + action.payload.price;
+            const updatedTotalPrice = state.totalPrice + (action.payload.price*action.payload.quantity);
             return {
                 cartMealsDetails: updatedMealsDetails,
                 totalPrice: updatedTotalPrice
@@ -50,6 +50,15 @@ export function cartReducer(state, action) {
                 cartMealsDetails: updatedMealsDetail,
                 totalPrice: updatedTotalAmount
             };
+        case "REMOVE_WHOLE_MEAL":
+            const existMealIdx = state.cartMealsDetails.findIndex(meal => meal.id === action.payload);
+            const existMealDetails = state.cartMealsDetails[existMealIdx];
+            const updatedAllTotalAmount = state.totalPrice - existMealDetails.price*existMealDetails.quantity;
+            const updatedCartMealDetail = state.cartMealsDetails.filter((meals) => meals.id !== action.payload);
+            return{
+                cartMealsDetails: updatedCartMealDetail,
+                totalPrice: updatedAllTotalAmount
+            }
         default:
             return state;
     }
