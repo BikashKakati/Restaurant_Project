@@ -10,7 +10,7 @@ function Navbar() {
         return initialQantity += cartMeal.quantity;
     },0)
     return (
-        <nav className="w-full py-1 bg-nav absolute block top-0 left-0 z-50">
+        <nav className="w-full py-1 bg-nav absolute block top-0 left-0 z-20">
             <Wrapper className="flex items-center justify-between text-white">
                 <NavLink to={"/"}>
                     <div className="px-6 py-3 hover:nav-hover cursor-pointer transition-all">
