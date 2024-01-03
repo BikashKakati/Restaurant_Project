@@ -1,26 +1,36 @@
+import { useContext, useRef } from "react";
+import { CartContext } from "../../context/ContextProvider";
 import { LazyLoadImg } from "../Ui/LazyLoadImage";
 import fallBackImg from "../../assets/NoImageFallback.svg.png";
 import { ShoppingCartIcon } from "@heroicons/react/24/solid";
 import { Link } from "react-router-dom";
-import { useContext } from "react";
-import { CartContext } from "../../context/ContextProvider";
 
 function Card({ mealData, cat }) {
-    const { addToCartHandler } = useContext(CartContext);
+    const { addToCartHandler,setPopupMessage,setAddToCartPopup} = useContext(CartContext);
+    const quantityRef = useRef();
 
     const { strMeal: name, strMealThumb: image, strCategory: category, idMeal: id } = mealData;
     const imageLink = mealData?.strMealThumb ? image : fallBackImg;
     const mealPrice = Number(id.slice(2));
 
     const handleAddToCart = () => {
+        const enteredQuantity = Number(quantityRef.current.value);
+        if(isNaN(enteredQuantity) || enteredQuantity>10 || !enteredQuantity){
+            setPopupMessage("invalid quantity");
+            setAddToCartPopup(true);
+            return;
+        }
         addToCartHandler({
             id,
             name,
             image,
             category,
-            quantity: 1,
+            quantity:enteredQuantity,
             price: mealPrice,
         })
+        setPopupMessage("Meal added to the cart!");
+        setAddToCartPopup(true);
+        quantityRef.current.value = "";
     }
 
     return (
@@ -37,8 +47,9 @@ function Card({ mealData, cat }) {
                     </div>
                 </div>
             </Link>
-            <div className="hidden absolute p-5 bg-zinc-800 rounded-full cart-icon-position group-hover:block hover:bg-zinc-600 cursor-pointer popup-animation" onClick={handleAddToCart}>
-                <ShoppingCartIcon className="h-7 w-7 text-white" />
+            <div className="w-44 hidden items-center justify-center gap-6 absolute p-5 bg-zinc-800 rounded-full cart-icon-position cursor-pointer popup-animation group-hover:flex ">
+                <ShoppingCartIcon className="h-7 w-7 text-white hover:text-red-500" onClick={handleAddToCart}/>
+                <input type="number" defaultValue="1" min="1" max="10" className="w-14 px-2 outline-none rounded-md" ref={quantityRef}/>
             </div>
         </div>
     )
