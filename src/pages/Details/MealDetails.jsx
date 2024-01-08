@@ -8,10 +8,11 @@ import { useContext } from "react";
 import { CartContext } from "../../context/ContextProvider";
 
 function MealDetails() {
-    const { addToCartHandler, setAddToCartPopup,setPopupMessage} = useContext(CartContext);
+    const { addToCartHandler, setAddToCartPopup} = useContext(CartContext);
     const { id } = useParams();
     const { data, loading } = useFetch(`lookup.php?i=${id}`);
     const { strArea: place, strCategory: category, strMeal: name, strMealThumb: image, strInstructions: details, strIngredient1: ingre1, strIngredient2: ingre2, strIngredient3: ingre3, } = data?.meals ? data?.meals[0] : {};
+    
     const mealPrice = Number(id.slice(2));
 
     useEffect(() => {
@@ -28,8 +29,7 @@ function MealDetails() {
                 price: mealPrice,
             }
         )
-        setPopupMessage("Meal added to the cart!");
-        setAddToCartPopup(true);
+        setAddToCartPopup({show:true, msg:"Meal added to the cart!"});
     }
 
     return (

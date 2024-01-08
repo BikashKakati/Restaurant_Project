@@ -6,7 +6,7 @@ import { ShoppingCartIcon } from "@heroicons/react/24/solid";
 import { Link } from "react-router-dom";
 
 function Card({ mealData, cat }) {
-    const { addToCartHandler,setPopupMessage,setAddToCartPopup} = useContext(CartContext);
+    const { addToCartHandler,setAddToCartPopup} = useContext(CartContext);
     const quantityRef = useRef();
 
     const { strMeal: name, strMealThumb: image, strCategory: category, idMeal: id } = mealData;
@@ -16,8 +16,7 @@ function Card({ mealData, cat }) {
     const handleAddToCart = () => {
         const enteredQuantity = Number(quantityRef.current.value);
         if(isNaN(enteredQuantity) || enteredQuantity>10 || !enteredQuantity){
-            setPopupMessage("invalid quantity");
-            setAddToCartPopup(true);
+            setAddToCartPopup({show:true, msg:"invalid quantity"});
             return;
         }
         addToCartHandler({
@@ -28,8 +27,7 @@ function Card({ mealData, cat }) {
             quantity:enteredQuantity,
             price: mealPrice,
         })
-        setPopupMessage("Meal added to the cart!");
-        setAddToCartPopup(true);
+        setAddToCartPopup({show:true, msg:"Meal added to the cart!"});
         quantityRef.current.value = "";
     }
 

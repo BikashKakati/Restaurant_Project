@@ -9,8 +9,7 @@ function ContextProvider({children}){
     const [state, dispatch] = useReducer(cartReducer, INITIAL_STATE);
     
     // it is a simple state, only for popup logic that is why used direct state.
-    const [addToCartPopup, setAddToCartPopup] = useState(false);
-    const [popupMessage, setPopupMessage] = useState("");
+    const [addToCartPopup, setAddToCartPopup] = useState({show:false, msg:""});
 
     function addToCartHandler(mealDetails){
         dispatch({type:"ADD_TO_CART", payload:mealDetails});
@@ -29,8 +28,6 @@ function ContextProvider({children}){
         removeWholeMeal,
         addToCartPopup,
         setAddToCartPopup,
-        popupMessage,
-        setPopupMessage
     }
     return(
         <CartContext.Provider value={cartDetails}>
