@@ -3,9 +3,12 @@ import {ShoppingCartIcon} from "@heroicons/react/24/solid";
 import Wrapper from "../Ui/Wrapper"
 import { useContext } from "react";
 import { CartContext } from "../../context/ContextProvider";
+import { useAuthContext } from "../../context/AuthContextProvider";
 
 function Navbar() {
     const {cartMealsDetails} = useContext(CartContext);
+    const{currentUser} =  useAuthContext();
+
     const mealsQuantity = cartMealsDetails.reduce((initialQantity, cartMeal) =>{
         return initialQantity += cartMeal.quantity;
     },0)
@@ -19,9 +22,9 @@ function Navbar() {
                 </NavLink>
 
                 <ul className="flex items-center justify-center font-medium transition-all">
-                    <NavLink to={"#"}>
+                    <NavLink to="/login">
                         <li className="px-5 py-3 hover:nav-hover">
-                            Login
+                            {currentUser ? "Log out":"Log in"}
                         </li>
                     </NavLink>
                     <NavLink to={"/cart"}>
