@@ -8,6 +8,8 @@ import ExploreCategory from "./pages/ExploreCategory/ExploreCategory"
 import Home from "./pages/Home/Home"
 import Modal from "./components/Ui/Modal"
 import Log from "./pages/Log/Log";
+import Profile from "./pages/Profile/Profile";
+import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 
 
 function App() {
@@ -18,11 +20,12 @@ function App() {
         <Navbar />
         {addToCartPopup.show && <Modal>{addToCartPopup.msg}</Modal>}
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/cart" element={<MealsCart/>} />
+          <Route path="/" element={<PrivateRoute><Home /></PrivateRoute>} />
+          <Route path="/cart" element={<PrivateRoute><MealsCart/></PrivateRoute>} />
           <Route path="/login" element={<Log/>} />
-          <Route path="/details/:id" element={<MealDetails />} />
-          <Route path="/categories/:catvarient" element={<ExploreCategory />} />
+          <Route path="/profile" element={<PrivateRoute><Profile/></PrivateRoute>} />
+          <Route path="/details/:id" element={<PrivateRoute><MealDetails /></PrivateRoute>} />
+          <Route path="/categories/:catvarient" element={<PrivateRoute><ExploreCategory /></PrivateRoute>} />
         </Routes>
       </div>
   )
