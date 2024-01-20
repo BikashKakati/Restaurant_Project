@@ -1,7 +1,7 @@
 const LOCAL_STORAGE_KEY = "AUTH_DATA";
 
 export const INITIAL_STATE = {
-    currentUser:localStorage.getItem(LOCAL_STORAGE_KEY) || null,
+    currentUser:JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) || null,
 }
 
 export const actionType = {

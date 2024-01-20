@@ -3,12 +3,8 @@ import { INITIAL_STATE, actionType, authReducer } from "./authReducer";
 import {auth} from "../services/firebase-config";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 
-const AuthContext =  createContext(INITIAL_STATE);
+export const AuthContext =  createContext(INITIAL_STATE);
 const LOCAL_STORAGE_KEY = "AUTH_DATA";
-
-export function useAuthContext(){
-    return useContext(AuthContext);
-}
 
 
 export function AuthContextProvider(props){
@@ -20,19 +16,18 @@ export function AuthContextProvider(props){
     async function logIn(email,password){
         const {user} = await signInWithEmailAndPassword(auth,email,password);
         dispatch({type:actionType.LOG_IN, payload:user});
+        localStorage.setItem(LOCAL_STORAGE_KEY,JSON.stringify(user));
     }
     function logOut(){
         dispatch({type:actionType.LOG_OUT});
+        localStorage.setItem(LOCAL_STORAGE_KEY,null);
     }
-
-    useEffect(()=>{
-        localStorage.setItem(LOCAL_STORAGE_KEY,JSON.stringify(state.currentUser))
-    },[state.currentUser])
 
     const contextValue = {
         currentUser:state.currentUser,
         signUp,
-        logIn
+        logIn,
+        logOut,
     }
 
     return(

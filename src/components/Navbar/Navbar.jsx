@@ -1,17 +1,18 @@
-import { NavLink } from "react-router-dom"
-import {ShoppingCartIcon} from "@heroicons/react/24/solid";
+import { Link, NavLink } from "react-router-dom"
+import { ShoppingCartIcon } from "@heroicons/react/24/solid";
 import Wrapper from "../Ui/Wrapper"
 import { useContext } from "react";
 import { CartContext } from "../../context/ContextProvider";
-import { useAuthContext } from "../../context/AuthContextProvider";
+import { AuthContext} from "../../context/AuthContextProvider";
+import { UserCircleIcon } from "@heroicons/react/24/outline";
 
 function Navbar() {
-    const {cartMealsDetails} = useContext(CartContext);
-    const{currentUser} =  useAuthContext();
+    const { cartMealsDetails } = useContext(CartContext);
+    const { currentUser } = useContext(AuthContext);
 
-    const mealsQuantity = cartMealsDetails.reduce((initialQantity, cartMeal) =>{
+    const mealsQuantity = cartMealsDetails?.reduce((initialQantity, cartMeal) => {
         return initialQantity += cartMeal.quantity;
-    },0)
+    }, 0)
     return (
         <nav className="w-full py-1 bg-nav absolute block top-0 left-0 z-20">
             <Wrapper className="flex items-center justify-between text-white">
@@ -22,14 +23,20 @@ function Navbar() {
                 </NavLink>
 
                 <ul className="flex items-center justify-center font-medium transition-all">
-                    <NavLink to="/login">
-                        <li className="px-5 py-3 hover:nav-hover">
-                            {currentUser ? "Log out":"Log in"}
-                        </li>
-                    </NavLink>
+
+                    <li className="px-5 py-3 hover:nav-hover">
+                        {
+                            currentUser ?
+                                <Link to="/profile">
+                                    <UserCircleIcon className="h-8 w-8" />
+                                </Link>
+                                :
+                                <Link to="/login">Log in</Link>
+                        }
+                    </li>
                     <NavLink to={"/cart"}>
                         <li className="relative px-5 py-3 hover:nav-hover">
-                            <ShoppingCartIcon className="h-6 w-6"/>
+                            <ShoppingCartIcon className="h-6 w-6" />
                             <span className="absolute right-0 top-0 py-.5 px-2 rounded-full bg-red-600">{mealsQuantity}</span>
                         </li>
                     </NavLink>
