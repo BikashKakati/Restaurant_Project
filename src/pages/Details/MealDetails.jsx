@@ -1,14 +1,12 @@
-import { useParams } from "react-router-dom"
-import { useFetch } from "../../hook/useFetch";
-import { useEffect } from "react";
 import { ShoppingCartIcon } from "@heroicons/react/24/solid";
+import { useEffect } from "react";
+import { useParams } from "react-router-dom";
 import Wrapper from "../../components/Ui/Wrapper";
 import { Loader } from "../../components/Ui/loader";
-import { useContext } from "react";
-import { CartContext } from "../../context/ContextProvider";
+import { useFetch } from "../../hook/useFetch";
 
 function MealDetails() {
-    const { addToCartHandler, setAddToCartPopup} = useContext(CartContext);
+
     const { id } = useParams();
     const { data, loading } = useFetch(`lookup.php?i=${id}`);
     const { strArea: place, strCategory: category, strMeal: name, strMealThumb: image, strInstructions: details, strIngredient1: ingre1, strIngredient2: ingre2, strIngredient3: ingre3, } = data?.meals ? data?.meals[0] : {};
@@ -19,17 +17,16 @@ function MealDetails() {
         window.scroll(0, 0);
     }, [])
     function handleAddToCart(){
-        addToCartHandler(
-            {
-                id,
-                name,
-                image,
-                category,
-                quantity: 1,
-                price: mealPrice,
-            }
-        )
-        setAddToCartPopup({show:true, msg:"Meal added to the cart!"});
+        // addToCartHandler(
+        //     {
+        //         id,
+        //         name,
+        //         image,
+        //         category,
+        //         quantity: 1,
+        //         price: mealPrice,
+        //     }
+        // )
     }
 
     return (

@@ -1,30 +1,27 @@
-import React, { useContext, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { AuthContext } from '../../context/AuthContextProvider';
-import { CartContext } from '../../context/ContextProvider';
+import { handleLogIn } from '../../services/redux/api/authThunks';
+import { createUserWithEmailAndPassword} from 'firebase/auth';
+import { auth } from '../../services/firebase-config';
 
 function LogInForm() {
     const emailRef = useRef();
     const passwordRef = useRef();
     const [isLogin, setIsLogin] = useState(true);
-    const { setAddToCartPopup } = useContext(CartContext);
-    const { signUp, logIn } = useContext(AuthContext);
     const Navigate = useNavigate();
+    const dispatch = useDispatch();
 
     async function submitHandler(e) {
         e.preventDefault();
-        try {
-            if (isLogin) {
-                await logIn(emailRef.current.value, passwordRef.current.value);
-                setAddToCartPopup({ show: true, msg: "Log in successful!" })
-                Navigate("/");
-            } else {
-                await signUp(emailRef.current.value, passwordRef.current.value);
-                setAddToCartPopup({ show: true, msg: "Sign up successful!" })
-                changeMode();
-            }
-        } catch (err) {
-            setAddToCartPopup({ show: true, msg: "Invalid email/password" })
+        const email = emailRef.current.value;
+        const password = passwordRef.current.value;
+        if (isLogin) {
+            await dispatch(handleLogIn({ email, password }));
+            Navigate("/");
+        } else {
+            await createUserWithEmailAndPassword(auth, email, password);
+            changeMode();
         }
     }
 

@@ -1,9 +1,9 @@
-import React, { Fragment, useContext } from 'react';
+import React, { Fragment } from 'react';
+import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
-import { AuthContext } from '../../context/AuthContextProvider';
 
 function PrivateRoute({children}) {
-    const {currentUser} = useContext(AuthContext);
+  const {currentUser} = useSelector(state => state.auth);
   return (
     <Fragment>
         {currentUser ? children : <Navigate to="/login"/>}

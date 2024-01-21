@@ -1,18 +1,15 @@
-import { Link, NavLink } from "react-router-dom"
-import { ShoppingCartIcon } from "@heroicons/react/24/solid";
-import Wrapper from "../Ui/Wrapper"
-import { useContext } from "react";
-import { CartContext } from "../../context/ContextProvider";
-import { AuthContext} from "../../context/AuthContextProvider";
 import { UserCircleIcon } from "@heroicons/react/24/outline";
+import { ShoppingCartIcon } from "@heroicons/react/24/solid";
+import { Link, NavLink } from "react-router-dom";
+import Wrapper from "../Ui/Wrapper";
+import { useSelector } from "react-redux";
 
 function Navbar() {
-    const { cartMealsDetails } = useContext(CartContext);
-    const { currentUser } = useContext(AuthContext);
-
-    const mealsQuantity = cartMealsDetails?.reduce((initialQantity, cartMeal) => {
-        return initialQantity += cartMeal.quantity;
-    }, 0)
+    const {currentUser} = useSelector(state => state.auth);
+    // const mealsQuantity = cartMealsDetails?.reduce((initialQantity, cartMeal) => {
+    //     return initialQantity += cartMeal.quantity;
+    // }, 0)
+    const mealsQuantity = 5;
     return (
         <nav className="w-full py-1 bg-nav absolute block top-0 left-0 z-20">
             <Wrapper className="flex items-center justify-between text-white">

@@ -1,13 +1,14 @@
-import React, { useContext } from 'react'
-import { AuthContext} from '../../context/AuthContextProvider'
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { handleLogOut } from '../../services/redux/slices/authSlice';
 
 function Profile() {
-    const {logOut} = useContext(AuthContext);
+    const dispatch = useDispatch();
     const Navigate = useNavigate();
 
     function handleLogout(){
-        logOut();
+        dispatch(handleLogOut());
         Navigate("/login");
     }
     return (

@@ -1,28 +1,22 @@
-import { useContext } from "react";
-import { CartContext } from "../../context/ContextProvider";
-import { PlusIcon, MinusIcon} from "@heroicons/react/24/solid";
+import { MinusIcon, PlusIcon } from "@heroicons/react/24/solid";
 function CartMealCard({ cartMeal }) {
-    const { addToCartHandler, removeFromCartHandler, removeWholeMeal} = useContext(CartContext);
     const handleAddToCart = () => {
-        addToCartHandler({...cartMeal, quantity:1});
     }
     const handleRemoveFromCart = () => {
-        removeFromCartHandler(cartMeal.id);
     }
     const handleRemoveWholeMeal = () =>{
-        removeWholeMeal(cartMeal.id);
     }
     return (
         <div className="w-full flex items-center justify-between gap-5 p-4 border-b-2 flex-wrap">
             <div className="flex items-center justify-start">
                 <div className="w-20 mr-5">
-                    <img src={cartMeal.image} alt={cartMeal.name} className="rounded-lg object-cover object-center" />
+                    <img src={cartMeal?.image} alt={cartMeal?.name} className="rounded-lg object-cover object-center" />
                 </div>
                 <div className="">
-                    <p className="text-sm">{cartMeal.name}</p>
-                    <span className="text-xl text-center mr-6 font-medium">₹{cartMeal.price}</span>
-                    <span className="text-base text-center">qty × {cartMeal.quantity}</span>
-                    <p className="text-zinc-600">{cartMeal.category}</p>
+                    <p className="text-sm">{cartMeal?.name}</p>
+                    <span className="text-xl text-center mr-6 font-medium">₹{cartMeal?.price}</span>
+                    <span className="text-base text-center">qty × {cartMeal?.quantity}</span>
+                    <p className="text-zinc-600">{cartMeal?.category}</p>
                 </div>
             </div>
             <div className="flex items-center justify-center gap-3">

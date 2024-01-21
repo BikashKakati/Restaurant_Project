@@ -1,10 +1,8 @@
-import { useContext } from "react";
-import Wrapper from "../../components/Ui/Wrapper"
-import { CartContext } from "../../context/ContextProvider";
-import CartMealCard from "./CartMealCard";
 import emptyCartFallback from "../../assets/emptyCart.webp";
+import Wrapper from "../../components/Ui/Wrapper";
+import CartMealCard from "./CartMealCard";
 function MealsCart() {
-    const { cartMealsDetails, totalPrice } = useContext(CartContext);
+    const cartMealsDetails = [];
     return (
         <div className="w-full h-full pt-20 mb-10">
             <Wrapper className="h-full">
@@ -22,7 +20,7 @@ function MealsCart() {
                         {
                             cartMealsDetails.map(cartMeal => {
                                 return (
-                                    <CartMealCard key={cartMeal.id} cartMeal={cartMeal} />
+                                    <CartMealCard key={cartMeal?.id} cartMeal={cartMeal} />
                                 )
                             })
                         }

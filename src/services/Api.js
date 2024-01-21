@@ -11,10 +11,10 @@ export async function fetchApiData(endPoint){
         console.log(err);
     }
 }
-export async function setCartDetails(userId,expenseData){
+export async function setCartDetails(userId,mealData){
     try{
-        const docRef = doc(db,`currentUser/${userId}/expense`,expenseData.id);
-        await setDoc(docRef, expenseData);
+        const docRef = doc(db,`cartDetails/${userId}/meal/${mealData.id}`);
+        await setDoc(docRef, mealData);
     }catch(err){
         throw new Error(err.message);
     }

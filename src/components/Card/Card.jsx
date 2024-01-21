@@ -1,12 +1,10 @@
-import { useContext, useRef } from "react";
-import { CartContext } from "../../context/ContextProvider";
-import { LazyLoadImg } from "../Ui/LazyLoadImage";
-import fallBackImg from "../../assets/NoImageFallback.svg.png";
 import { ShoppingCartIcon } from "@heroicons/react/24/solid";
+import { useRef } from "react";
 import { Link } from "react-router-dom";
+import fallBackImg from "../../assets/NoImageFallback.svg.png";
+import { LazyLoadImg } from "../Ui/LazyLoadImage";
 
 function Card({ mealData, cat }) {
-    const { addToCartHandler,setAddToCartPopup} = useContext(CartContext);
     const quantityRef = useRef();
 
     const { strMeal: name, strMealThumb: image, strCategory: category, idMeal: id } = mealData;
@@ -14,21 +12,21 @@ function Card({ mealData, cat }) {
     const mealPrice = Number(id.slice(2));
 
     const handleAddToCart = () => {
-        const enteredQuantity = Number(quantityRef.current.value);
-        if(isNaN(enteredQuantity) || enteredQuantity>10 || !enteredQuantity){
-            setAddToCartPopup({show:true, msg:"invalid quantity"});
-            return;
-        }
-        addToCartHandler({
-            id,
-            name,
-            image,
-            category,
-            quantity:enteredQuantity,
-            price: mealPrice,
-        })
-        setAddToCartPopup({show:true, msg:"Meal added to the cart!"});
-        quantityRef.current.value = "";
+        // const enteredQuantity = Number(quantityRef.current.value);
+        // if(isNaN(enteredQuantity) || enteredQuantity>10 || !enteredQuantity){
+        //     setAddToCartPopup({show:true, msg:"invalid quantity"});
+        //     return;
+        // }
+        // addToCartHandler({
+        //     id,
+        //     name,
+        //     image,
+        //     category,
+        //     quantity:enteredQuantity,
+        //     price: mealPrice,
+        // })
+        // setAddToCartPopup({show:true, msg:"Meal added to the cart!"});
+        // quantityRef.current.value = "";
     }
 
     return (
