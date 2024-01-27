@@ -1,28 +1,44 @@
+import { Suspense, lazy, useEffect } from "react";
+import { Toaster } from "react-hot-toast";
+import { useDispatch, useSelector } from "react-redux";
 import { Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
-import MealsCart from "./pages/Cart/MealsCart";
-import MealDetails from "./pages/Details/MealDetails";
-import ExploreCategory from "./pages/ExploreCategory/ExploreCategory";
-import Home from "./pages/Home/Home";
-import Log from "./pages/Log/Log";
-import Profile from "./pages/Profile/Profile";
+
+const Home = lazy(() => import("./pages/Home/Home"));
+const Log = lazy(() => import("./pages/Log/Log"));
+const Profile = lazy(() => import("./pages/Profile/Profile"));
+const MealsCart = lazy(() => import("./pages/Cart/MealsCart"));
+const MealDetails = lazy(() => import("./pages/Details/MealDetails"));
+const ExploreCategory = lazy(() => import("./pages/ExploreCategory/ExploreCategory"));
+
+import { getAllMeals } from "./services/redux/api/cartThunks";
+import { Loader } from "./components/Ui/loader";
 
 
 function App() {
+  const dispatch = useDispatch();
+  const { currentUser } = useSelector(state => state.auth);
+
+  useEffect(() => {
+    dispatch(getAllMeals());
+  }, [currentUser])
 
   return (
-      <div className="relative bg-slate-50 w-full min-h-dvh">
-        <Navbar />
+    <div className="relative bg-slate-50 w-full min-h-dvh">
+      <Navbar />
+      <Toaster position="top-center" />
+      <Suspense fallback={<Loader initial={true}/>}>
         <Routes>
           <Route path="/" element={<PrivateRoute><Home /></PrivateRoute>} />
-          <Route path="/cart" element={<PrivateRoute><MealsCart/></PrivateRoute>} />
-          <Route path="/login" element={<Log/>} />
-          <Route path="/profile" element={<PrivateRoute><Profile/></PrivateRoute>} />
+          <Route path="/cart" element={<PrivateRoute><MealsCart /></PrivateRoute>} />
+          <Route path="/login" element={<Log />} />
+          <Route path="/profile" element={<PrivateRoute><Profile /></PrivateRoute>} />
           <Route path="/details/:id" element={<PrivateRoute><MealDetails /></PrivateRoute>} />
           <Route path="/categories/:catvarient" element={<PrivateRoute><ExploreCategory /></PrivateRoute>} />
         </Routes>
-      </div>
+      </Suspense>
+    </div>
   )
 }
 export default App
