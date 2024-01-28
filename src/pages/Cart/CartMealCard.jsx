@@ -1,10 +1,22 @@
 import { MinusIcon, PlusIcon } from "@heroicons/react/24/solid";
+import { useDispatch } from "react-redux";
+import { removeCarts, removeWholeCart, setCarts } from "../../services/redux/api/cartThunks";
+
+
 function CartMealCard({ cartMeal }) {
+    const dispatch = useDispatch();
     const handleAddToCart = () => {
+        dispatch(setCarts({...cartMeal, quantity: 1}));
     }
-    const handleRemoveFromCart = () => {
+    const handleRemoveFromCart = (mealId) => {
+        if(cartMeal?.quantity > 1){
+            dispatch(removeCarts(mealId));
+        }else{
+            dispatch(removeWholeCart(mealId));
+        }
     }
-    const handleRemoveWholeMeal = () =>{
+    const handleRemoveWholeMeal = (mealId) =>{
+        dispatch(removeWholeCart(mealId))
     }
     return (
         <div className="w-full flex items-center justify-between gap-5 p-4 border-b-2 flex-wrap">
@@ -20,11 +32,11 @@ function CartMealCard({ cartMeal }) {
                 </div>
             </div>
             <div className="flex items-center justify-center gap-3">
-                <button className="px-4 py-2 bg-zinc-600 text-white rounded-xl" onClick={handleRemoveWholeMeal}>Remove</button>
+                <button className="px-4 py-2 bg-zinc-600 text-white rounded-xl" onClick={()=> handleRemoveWholeMeal(cartMeal?.id)}>Remove</button>
                 <button className="px-3 py-2 text-xl bg-red-500" onClick={handleAddToCart}>
                     <PlusIcon className="h-6 w-6"/>
                 </button>
-                <button className="px-3 py-2 text-xl bg-red-500" onClick={handleRemoveFromCart}>
+                <button className="px-3 py-2 text-xl bg-red-500" onClick={()=>handleRemoveFromCart(cartMeal?.id)}>
                     <MinusIcon className="h-6 w-6"/>
                 </button>
             </div>
