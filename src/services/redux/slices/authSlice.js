@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { handleLogIn } from "../api/authThunks";
+import { toast } from "react-hot-toast";
 
 
 const LOCAL_STORAGE_KEY = "AUTH_DATA";
@@ -16,11 +17,16 @@ const authSlice = createSlice({
         }
     },
     extraReducers:(builder)=>{
-        builder.addCase(handleLogIn.fulfilled, (state,action) =>{
+        builder.addCase(handleLogIn.pending,(state)=>{
+            toast.loading("Loading...");
+        }).addCase(handleLogIn.fulfilled, (state,action) =>{
             state.currentUser = action.payload;
             localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(action.payload));
+            toast.remove();
+            toast.success("login successfully!");
         }).addCase(handleLogIn.rejected,(state)=>{
-            console.log("invalid email/password");
+            toast.remove();
+            toast.error("invalid email/password");
         })
     }
 })
