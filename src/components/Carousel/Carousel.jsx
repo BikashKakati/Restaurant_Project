@@ -36,7 +36,7 @@ function Carousel() {
                                     {
                                         data?.categories?.map((category) => {
                                             return (
-                                                <SwiperSlide className="w-44" key={category?.idCategory} >
+                                                <SwiperSlide key={category?.idCategory} style={{width:"11rem"}}>
                                                     <CarouselCard cardData={category} />
                                                 </SwiperSlide>
                                             )
