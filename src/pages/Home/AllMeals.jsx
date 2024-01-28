@@ -53,7 +53,7 @@ function AllMeals() {
                     {
                         !loading &&
                         <InfiniteScroll
-                            className="flex pt-4 items-start justify-center flex-row flex-wrap gap-4"
+                            className="flex pt-4 items-start justify-center flex-row flex-wrap gap-6"
                             dataLength={mealData?.length || 0}
                             next={fetchNextData}
                             hasMore={alphabet <= 111}

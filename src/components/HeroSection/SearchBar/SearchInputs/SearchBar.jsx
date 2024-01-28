@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
+import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
+import { useEffect, useState } from "react";
 import { fetchApiData } from "../../../../services/Api";
-import { MagnifyingGlassIcon } from "@heroicons/react/24/outline"
 
 function SearchBar({ setSearching,setSearchResult}) {
     const [query, setQuery] = useState("");
@@ -35,7 +35,7 @@ function SearchBar({ setSearching,setSearchResult}) {
         <div className="h-full w-2/3 rounded-xl flex items-center">
             <MagnifyingGlassIcon className="h-5 w-5 ml-2 text-zinc-500" />
             <input
-                type="text"
+                type="search"
                 placeholder="search by name...."
                 className="w-full h-full px-3 py-2 rounded-xl outline-0"
                 onChange={(e) => {
