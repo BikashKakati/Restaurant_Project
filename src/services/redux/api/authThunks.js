@@ -7,7 +7,7 @@ export const handleLogIn = createAsyncThunk(
     async function ({email, password}) {
         try {
             const { user } = await signInWithEmailAndPassword(auth, email, password);
-            return { email: user.email, isVerified: user.emailVerified, id: user.uid };
+            return { email: user.email, isVerified: user.emailVerified, uid: user.uid };
         }catch(err){
             throw new Error(err.message);
         }
