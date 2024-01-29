@@ -12,7 +12,7 @@ function SearchSection() {
     const [searchResults, setSearchResult] = useState([]);
 
     return (
-        <div className="max-w-145 w-full relative flex items-center text-slate-500 h-12 bg-white rounded-xl">
+        <div className="max-w-145 w-full relative flex items-center text-slate-500 h-12 bg-white rounded-xl overflow-hidden">
             <SelectOptionBar setSearchResult={setSearchResult} setSearching={setSearching}/>
             <div className="w-0.5 h-6 bg-zinc-300"></div>
             <SearchBar setSearching={setSearching} setSearchResult={setSearchResult}/>

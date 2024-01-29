@@ -13,16 +13,17 @@ function Navbar() {
         return initialQantity += cartMeal.quantity;
     }, 0)
     return (
-        <nav className={`w-full py-0.5 absolute ${location.pathname ==='/' ? "bg-nav":"bg-zinc-800"} block top-0 left-0 z-20`}>
-            <Wrapper className="flex items-center justify-between text-white">
-                <NavLink to={"/"}>
-                    <div className="px-6 py-3 md:hover:nav-hover cursor-pointer transition-all">
+        <nav className={`w-full py-0.5 absolute ${location.pathname === '/' ? "bg-nav" : "bg-zinc-800"} block top-0 left-0 z-20`}>
+            <Wrapper className="flex items-center justify-start text-white">
+                <div className="px-5 py-3 basis-full md:hover:nav-hover cursor-pointer transition-all">
+                    <NavLink to={"/"}>
                         <span className="text-3xl font-semibold">FoodAuto</span>
-                    </div>
-                </NavLink>
+                    </NavLink>
+                </div>
 
-                <ul className="fixed left-0 bottom-0 w-full  bg-zinc-800 md:relative md:w-auto md:bg-transparent flex items-center justify-around  md:justify-center md:space-x-6 font-medium transition-all">
-                    {currentUser && <li>Welcome {currentUser?.email}</li>}
+                {currentUser && <p className="font-semibold md:mr-4">Welcome {currentUser?.email}</p>}
+
+                <ul className="fixed left-0 bottom-0 w-full  bg-zinc-800 md:relative md:w-auto md:bg-transparent flex items-center justify-around  md:justify-center md:space-x-5 font-medium transition-all">
                     <li className="px-5 py-3 md:hover:nav-hover">
                         {
                             currentUser ?
@@ -43,7 +44,7 @@ function Navbar() {
                     </li>
                     <li className="px-5 py-3 md:hover:nav-hover">
                         <NavLink to={"#"} className="flex flex-col">
-                            <PhoneIcon className="h-6 w-6"/>
+                            <PhoneIcon className="h-6 w-6" />
                             <span className="text-xs">contact</span>
                         </NavLink>
                     </li>

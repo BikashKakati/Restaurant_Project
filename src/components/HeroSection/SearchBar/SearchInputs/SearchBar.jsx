@@ -32,12 +32,12 @@ function SearchBar({ setSearching,setSearchResult}) {
 
     
     return (
-        <div className="h-full w-2/3 rounded-xl flex items-center">
+        <div className="h-full w-2/3 flex items-center">
             <MagnifyingGlassIcon className="h-5 w-5 ml-2 text-zinc-500" />
             <input
                 type="search"
                 placeholder="search by name...."
-                className="w-full h-full px-3 py-2 rounded-xl outline-0"
+                className="w-full h-full px-3 py-2 outline-0 bg-transparent"
                 onChange={(e) => {
                     setQuery(e.target.value);
                     setSearchResult([]);

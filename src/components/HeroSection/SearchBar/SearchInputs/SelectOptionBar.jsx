@@ -28,7 +28,7 @@ function SelectOptionBar({ setSearching, setSearchResult }) {
 
 
     return (
-        <div className="h-full w-1/3 rounded-xl flex items-center">
+        <div className="h-full w-1/3 flex items-center">
             <MapPinIcon className="h-6 w-6 ml-2 text-red-500" />
             <select
                 onChange={(e) => {
@@ -37,7 +37,7 @@ function SelectOptionBar({ setSearching, setSearchResult }) {
                     setSearchResult([]);
                 }}
                 value={selectedPlace}
-                className="w-full h-full px-3 py-2 rounded-xl outline-0"
+                className="w-full h-full px-3 py-2 outline-0 bg-transparent"
             >
                 {
                     !loading && data?.meals?.map((place,index) => {
