@@ -14,8 +14,8 @@ function Navbar() {
     }, 0)
     return (
         <nav className={`w-full py-0.5 absolute ${location.pathname === '/' ? "bg-nav" : "bg-zinc-800"} block top-0 left-0 z-20`}>
-            <Wrapper className="flex items-center justify-start text-white">
-                <div className="px-5 py-3 basis-full md:hover:nav-hover cursor-pointer transition-all">
+            <Wrapper className="flex items-center justify-between text-white">
+                <div className="p-3 mr-6 md:mr-0 md:hover:nav-hover cursor-pointer transition-all">
                     <NavLink to={"/"}>
                         <span className="text-3xl font-semibold">FoodAuto</span>
                     </NavLink>
@@ -32,7 +32,7 @@ function Navbar() {
                                     <span className="text-xs">profile</span>
                                 </Link>
                                 :
-                                <Link to="/login">Log in</Link>
+                                <Link to="/login" className="text-nowrap">Login</Link>
                         }
                     </li>
                     <li className="relative px-5 py-3 md:hover:nav-hover">
