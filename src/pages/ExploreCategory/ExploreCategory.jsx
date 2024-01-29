@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom"
 import { useFetch } from "../../hook/useFetch"
 import Card from "../../components/Card/Card";
-import { Loader } from "../../components/Ui/loader";
+import { Loader } from "../../components/Ui/Loader";
 import Wrapper from "../../components/Ui/Wrapper";
 
 function ExploreCategory() {

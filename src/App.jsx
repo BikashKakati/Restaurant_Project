@@ -13,7 +13,7 @@ const MealsCart = lazy(() => import("./pages/Cart/MealsCart"));
 const MealDetails = lazy(() => import("./pages/Details/MealDetails"));
 const ExploreCategory = lazy(() => import("./pages/ExploreCategory/ExploreCategory"));
 
-import { Loader } from "./components/Ui/loader";
+import { Loader } from "./components/Ui/Loader";
 import { getAllMeals } from "./services/redux/api/cartThunks";
 
 

@@ -3,7 +3,7 @@ import Card from "../../components/Card/Card";
 import Wrapper from "../../components/Ui/Wrapper";
 import { fetchApiData } from "../../services/Api";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { Loader } from "../../components/Ui/loader";
+import { Loader } from "../../components/Ui/Loader";
 
 function AllMeals() {
     const [alphabet, setAlphabet] = useState(97);
