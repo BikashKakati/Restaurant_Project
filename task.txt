@@ -1,3 +1,1 @@
-Task - integrate database// complete
-add to cart from meal details page,
-sign up notificaion
+Task - Add footer

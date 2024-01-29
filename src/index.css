@@ -8,7 +8,7 @@
         @apply bg-zinc-50;
     }
     .bg-nav{
-        background: rgba(0,0,0,.2);
+        background: rgba(0,0,0,.1);
     }
     .nav-hover{
         background: rgba(236, 229, 229, 0.5);
