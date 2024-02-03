@@ -14,7 +14,7 @@ function Profile() {
         Navigate("/login");
     }
     return (
-        <div className="w-full h-full pt-20">
+        <div className="w-full min-h-dvh pt-20 mb-20">
             <Wrapper>
                 <div className="max-w-[50rem] w-full min-h-32 bg-white shadow-custom m-auto flex items-center justify-center flex-wrap">
                     <p className="basis-full text-center font-semibold">{currentUser.email}</p>

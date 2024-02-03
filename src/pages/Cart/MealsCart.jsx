@@ -5,7 +5,7 @@ import CartMealCard from "./CartMealCard";
 function MealsCart() {
     const {cartDetails, totalAmount} = useSelector(state => state.cart);
     return (
-        <div className="w-full h-full pt-20">
+        <div className="relative w-full min-h-dvh pt-20">
             <Wrapper className="h-full mb-32 md:mb-10">
                 <div className="relative h-full cart-container w-full bg-white shadow-custom rounded-md p-3 flex flex-col justify-between">
                     <div className="w-full h-full">
