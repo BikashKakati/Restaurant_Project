@@ -1,5 +1,4 @@
 import { Suspense, lazy, useEffect } from "react";
-import { Toaster } from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
@@ -14,7 +13,9 @@ const MealDetails = lazy(() => import("./pages/Details/MealDetails"));
 const ExploreCategory = lazy(() => import("./pages/ExploreCategory/ExploreCategory"));
 
 import { Loader } from "./components/Ui/Loader";
+import Modal from "./components/Ui/Modal";
 import { getAllMeals } from "./services/redux/api/cartThunks";
+import Footer from "./components/Footer/Footer";
 
 
 function App() {
@@ -26,9 +27,9 @@ function App() {
   }, [currentUser])
 
   return (
-    <div className="relative w-full min-h-dvh">
+    <div className="relative w-full">
       <Navbar />
-      <Toaster position="top-center" />
+      <Modal/>
       <Suspense fallback={<Loader initial={true}/>}>
         <Routes>
           <Route path="/" element={<PrivateRoute><Home /></PrivateRoute>} />
@@ -40,6 +41,7 @@ function App() {
           <Route path="/categories/:catvarient" element={<PrivateRoute><ExploreCategory /></PrivateRoute>} />
         </Routes>
       </Suspense>
+      <Footer/>
     </div>
   )
 }
