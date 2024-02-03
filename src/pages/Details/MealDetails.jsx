@@ -34,7 +34,7 @@ function MealDetails() {
 
     return (
 
-        <div className="w-full h-full pt-20">
+        <div className="w-full min-h-dvh pt-20">
             {loading && <Loader initial={true} />}
             {
                 !loading &&
