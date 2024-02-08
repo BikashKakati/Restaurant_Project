@@ -19,7 +19,7 @@ function LogInForm() {
 
     return (
         <div className="w-full h-dvh mb-20 pt-20 md:mb-0">
-            <div className="relative w-full h-full md:max-w-128 md:h-128 mx-auto py-8 px-10 md:shadow-custom bg-white rounded-md">
+            <div className="relative w-full h-full md:h-auto md:max-w-128 mx-auto py-8 px-10 md:shadow-custom bg-white rounded-md">
                 <h4 className='text-center text-2xl font-bold'>Log In</h4>
                 <form className="w-full *:w-full *:mb-10 *:rounded-lg" onSubmit={submitHandler}>
                     <label htmlFor="email">Email</label>
