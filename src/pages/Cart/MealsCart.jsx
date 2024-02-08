@@ -2,6 +2,7 @@ import { useSelector } from "react-redux";
 import emptyCartFallback from "../../assets/emptyCart.webp";
 import Wrapper from "../../components/Ui/Wrapper";
 import CartMealCard from "./CartMealCard";
+import Footer from "../../components/Footer/Footer";
 function MealsCart() {
     const {cartDetails, totalAmount} = useSelector(state => state.cart);
     return (
@@ -30,6 +31,7 @@ function MealsCart() {
                     <p className="my-5 mx-10 text-lg font-medium">Total Price ₹{totalAmount}</p>
                 </div>
             </Wrapper>
+            <Footer/>
         </div>
     )
 }

@@ -23,6 +23,7 @@ function SignupForm() {
                 return;
             }
             await createUserWithEmailAndPassword(auth, email, password);
+            toast.remove();
             toast.success("sign up successfully")
             Navigate("/login");
         } catch (err) {
@@ -32,8 +33,8 @@ function SignupForm() {
     }
 
     return (
-        <div className="w-full min-h-dvh pt-20 md:mb-0">
-            <div className="relative w-full h-full mb-20 md:max-w-128 md:h-128 mx-auto py-8 px-10 md:shadow-custom bg-white rounded-md">
+        <div className="w-full min-h-dvh pt-20">
+            <div className="relative w-full h-full md:h-auto mb-20 md:max-w-128 mx-auto py-8 px-10 md:shadow-custom bg-white rounded-md">
                 <h4 className='text-center text-2xl font-bold'>Sign Up</h4>
                 <form className="w-full *:w-full *:mb-10 *:rounded-lg" onSubmit={signUpHandler}>
                     <label htmlFor="email">Email</label>

@@ -35,13 +35,13 @@ function Navbar() {
                                 <Link to="/login" className="text-nowrap">Login</Link>
                         }
                     </li>
-                    <li className="relative px-5 py-3 md:hover:nav-hover">
+                    {currentUser && <li className="relative px-5 py-3 md:hover:nav-hover">
                         <NavLink to={"/cart"} className="flex flex-col ">
                             <ShoppingCartIcon className="h-6 w-6" />
                             <span className="absolute right-0 top-0 py-.5 px-2 rounded-full bg-red-600">{mealsQuantity}</span>
                             <span className="text-xs">cart</span>
                         </NavLink>
-                    </li>
+                    </li>}
                     <li className="px-5 py-3 md:hover:nav-hover">
                         <NavLink to={"#"} className="flex flex-col">
                             <PhoneIcon className="h-6 w-6" />

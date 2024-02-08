@@ -7,6 +7,7 @@ import { useFetch } from "../../hook/useFetch";
 import { setCarts } from "../../services/redux/api/cartThunks";
 import { useDispatch } from "react-redux";
 import { toast } from "react-hot-toast";
+import Footer from "../../components/Footer/Footer";
 
 function MealDetails() {
     const dispatch = useDispatch();
@@ -62,6 +63,7 @@ function MealDetails() {
                     </div>
                 </Wrapper>
             }
+            <Footer/>
         </div>
     )
 }

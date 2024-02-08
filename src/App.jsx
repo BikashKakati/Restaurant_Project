@@ -41,7 +41,6 @@ function App() {
           <Route path="/categories/:catvarient" element={<PrivateRoute><ExploreCategory /></PrivateRoute>} />
         </Routes>
       </Suspense>
-      <Footer/>
     </div>
   )
 }
