@@ -13,15 +13,24 @@ function MealDetails() {
     const dispatch = useDispatch();
     const { id } = useParams();
     const { data, loading } = useFetch(`lookup.php?i=${id}`);
-    const { strArea: place, strCategory: category, strMeal: name, strMealThumb: image, strInstructions: details, strIngredient1: ingre1, strIngredient2: ingre2, strIngredient3: ingre3, } = data?.meals ? data?.meals[0] : {};
-    
+
+    const mealData = data?.meals ? data.meals[0] : {};
+    const { strArea: place = "place", strCategory: category = "category", strMeal: name = "name", strMealThumb: image = "image", strInstructions: details = "details" } = mealData;
     const mealPrice = Number(id.slice(2));
+
+    const ingredients = Object.entries(mealData).filter(ele => {
+        const reqWord = ele[0].slice(0, ele[0].length - 1)
+        if (reqWord === "strIngredient") {
+            return ele;
+        }
+    })
+
 
     useEffect(() => {
         window.scroll(0, 0);
     }, [])
-    
-    function handleAddToCart(){
+
+    function handleAddToCart() {
         dispatch(setCarts({
             id,
             name,
@@ -45,10 +54,10 @@ function MealDetails() {
                     </div>
                     <div className="w-full">
                         <p className="text-xl md:text-3xl font-medium">{name}</p>
-                        <div className="mt-5 flex flex-wrap items-center justify-start gap-4 md:gap-8 text-nowrap *:px-4 *:py-1 md:*:py-3 *:bg-zinc-600 *:rounded-3xl *:text-white *:text-xs md:*:text-sm">
-                            <span >{ingre1}</span>
-                            <span >{ingre2}</span>
-                            <span >{ingre3}</span>
+                        <div className="mt-5 bg-zinc-200 p-4 rounded-md flex flex-wrap items-center justify-start gap-2 md:gap-5 text-nowrap *:px-4 *:py-1 md:*:py-2 *:bg-zinc-600 *:rounded-3xl *:text-white *:text-xs md:*:text-sm">
+                            {
+                                ingredients.map(ingred => <span key={ingred[0]}>{ingred[1]||"not-found"}</span>)
+                            }
                         </div>
                         <div className="mt-5 flex flex-wrap items-center justify-start gap-5">
                             <span className="text-lg md:text-xl font-normal text-zinc-700 ">{category}</span>
@@ -63,7 +72,7 @@ function MealDetails() {
                     </div>
                 </Wrapper>
             }
-            <Footer/>
+            <Footer />
         </div>
     )
 }
