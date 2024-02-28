@@ -10,7 +10,7 @@ function Navbar() {
     const { currentUser } = useSelector(state => state.auth);
     const { cartDetails } = useSelector(state => state.cart);
     const mealsQuantity = cartDetails?.reduce((initialQantity, cartMeal) => {
-        return initialQantity += cartMeal.quantity;
+        return initialQantity + cartMeal.quantity;
     }, 0)
     return (
         <nav className={`w-full py-0.5 absolute ${location.pathname === '/' ? "bg-nav" : "bg-zinc-800"} block top-0 left-0 z-20`}>

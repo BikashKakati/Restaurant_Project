@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
+import InfiniteScroll from "react-infinite-scroll-component";
 import Card from "../../components/Card/Card";
+import { CardSkeletonMultiple } from "../../components/Card/CardSkeletonMultiple";
 import Wrapper from "../../components/Ui/Wrapper";
 import { fetchApiData } from "../../services/Api";
-import InfiniteScroll from "react-infinite-scroll-component";
-import { Loader } from "../../components/Ui/Loader";
 
 function AllMeals() {
     const [alphabet, setAlphabet] = useState(97);
@@ -49,7 +49,9 @@ function AllMeals() {
             <Wrapper>
                 <p className="text-3xl mb-4 font-normal">Find All Meals Here</p>
                 <div className="w-full">
-                    {loading && <Loader initial={true} />}
+                    {loading &&
+                        <CardSkeletonMultiple/>
+                    }
                     {
                         !loading &&
                         <InfiniteScroll
@@ -57,7 +59,7 @@ function AllMeals() {
                             dataLength={mealData?.length || 0}
                             next={fetchNextData}
                             hasMore={alphabet <= 111}
-                            loader={<Loader />}
+                            loader={<CardSkeletonMultiple/>}
                         >
                             {
                                 mealData?.map((meal) => {
