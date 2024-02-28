@@ -1,9 +1,10 @@
-import { useParams } from "react-router-dom"
-import { useFetch } from "../../hook/useFetch"
+import { Fragment } from "react";
+import { useParams } from "react-router-dom";
 import Card from "../../components/Card/Card";
-import { Loader } from "../../components/Ui/Loader";
-import Wrapper from "../../components/Ui/Wrapper";
+import { CardSkeletonMultiple } from "../../components/Card/CardSkeletonMultiple";
 import Footer from "../../components/Footer/Footer";
+import Wrapper from "../../components/Ui/Wrapper";
+import { useFetch } from "../../hook/useFetch";
 
 function ExploreCategory() {
     const { catvarient } = useParams();
@@ -13,19 +14,24 @@ function ExploreCategory() {
             <Wrapper className="mb-20">
                 <p className="text-3xl mb-4 font-normal">All {catvarient} items is here</p>
                 <div className="flex pt-4 items-start justify-center flex-row flex-wrap gap-4">
-                    {loading && <Loader initial={true} />}
+                    {loading &&
+                    <Fragment>
+                        <CardSkeletonMultiple/>
+                        <CardSkeletonMultiple/>
+                    </Fragment>
+                    }
                     {!loading &&
                         <>
                             {
                                 data?.meals?.map((meal) => {
-                                    return <Card key={meal.idMeal} mealData={meal} cat={catvarient}/>
+                                    return <Card key={meal.idMeal} mealData={meal} cat={catvarient} />
                                 })
                             }
                         </>
                     }
                 </div>
             </Wrapper>
-            <Footer/>
+            <Footer />
         </div>
     )
 }
