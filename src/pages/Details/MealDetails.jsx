@@ -16,11 +16,12 @@ function MealDetails() {
 
     const mealData = data?.meals ? data.meals[0] : {};
     const { strArea: place = "place", strCategory: category = "category", strMeal: name = "name", strMealThumb: image = "image", strInstructions: details = "details" } = mealData;
+    
     const mealPrice = Number(id.slice(2));
 
     const ingredients = Object.entries(mealData).filter(ele => {
-        const reqWord = ele[0].slice(0, ele[0].length - 1)
-        if (reqWord === "strIngredient") {
+        // to filter out other data and blank ingredient
+        if (ele[0].includes("strIngredient") && ele[1].length) {
             return ele;
         }
     })
@@ -56,7 +57,7 @@ function MealDetails() {
                         <p className="text-xl md:text-3xl font-medium">{name}</p>
                         <div className="mt-5 bg-zinc-200 p-4 rounded-md flex flex-wrap items-center justify-start gap-2 md:gap-5 text-nowrap *:px-4 *:py-1 md:*:py-2 *:bg-zinc-600 *:rounded-3xl *:text-white *:text-xs md:*:text-sm">
                             {
-                                ingredients.map(ingred => <span key={ingred[0]}>{ingred[1]||"not-found"}</span>)
+                                ingredients?.map(ingred => <span key={ingred[0]}>{ingred[1]}</span>)
                             }
                         </div>
                         <div className="mt-5 flex flex-wrap items-center justify-start gap-5">

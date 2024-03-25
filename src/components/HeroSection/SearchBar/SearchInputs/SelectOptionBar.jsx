@@ -12,7 +12,7 @@ function SelectOptionBar({ setSearching, setSearchResult }) {
         if (subscribe) {
             fetchSearchData()
                 .then((data) => setSearchResult(data))
-                setSearching(false);
+            setSearching(false);
         }
         return () => { subscribe = false }
     }, [selectedPlace])
@@ -39,8 +39,9 @@ function SelectOptionBar({ setSearching, setSearchResult }) {
                 value={selectedPlace}
                 className="w-full h-full px-3 py-2 outline-0 bg-transparent"
             >
+                <option key="places" value="">Choose Places</option>
                 {
-                    !loading && data?.meals?.map((place,index) => {
+                    !loading && data?.meals?.map((place, index) => {
                         return (
                             <option key={index} value={place.strArea}>{place.strArea}</option>
                         )

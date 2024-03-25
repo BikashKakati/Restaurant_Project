@@ -27,7 +27,7 @@ function CartMealCard({ cartMeal }) {
                 <div className="">
                     <p className="text-sm">{cartMeal?.name}</p>
                     <span className="text-xl text-center mr-6 font-medium">₹{cartMeal?.price}</span>
-                    <span className="text-base text-center">qty × {cartMeal?.quantity}</span>
+                    <span className="text-base text-center font-bold">qty × {cartMeal?.quantity}</span>
                     <p className="text-zinc-600">{cartMeal?.category}</p>
                 </div>
             </div>
