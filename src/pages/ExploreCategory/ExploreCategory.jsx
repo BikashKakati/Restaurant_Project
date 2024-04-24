@@ -2,7 +2,6 @@ import { Fragment } from "react";
 import { useParams } from "react-router-dom";
 import Card from "../../components/Card/Card";
 import { CardSkeletonMultiple } from "../../components/Card/CardSkeletonMultiple";
-import Footer from "../../components/Footer/Footer";
 import Wrapper from "../../components/Ui/Wrapper";
 import { useFetch } from "../../hook/useFetch";
 
@@ -31,7 +30,6 @@ function ExploreCategory() {
                     }
                 </div>
             </Wrapper>
-            <Footer />
         </div>
     )
 }

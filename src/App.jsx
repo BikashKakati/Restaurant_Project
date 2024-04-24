@@ -28,7 +28,7 @@ function App() {
 
   return (
     <div className="relative w-full">
-      <Navbar />
+      {currentUser && <Navbar />}
       <Modal/>
       <Suspense fallback={<Loader initial={true}/>}>
         <Routes>
@@ -41,6 +41,7 @@ function App() {
           <Route path="/categories/:catvarient" element={<PrivateRoute><ExploreCategory /></PrivateRoute>} />
         </Routes>
       </Suspense>
+      {currentUser &&<Footer/>}
     </div>
   )
 }
