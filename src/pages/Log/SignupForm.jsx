@@ -33,20 +33,20 @@ function SignupForm() {
     }
 
     return (
-        <div className="w-full min-h-dvh pt-20 bg-[url('/food.avif')]">
+        <div className="w-full h-dvh pt-0 md:pt-20 bg-[url('/food.avif')]">
             <div className="bg-overlay"></div>
-            <div className="relative w-full h-full md:h-auto mb-20 md:max-w-128 mx-auto py-8 px-10 md:shadow-custom bg-white rounded-md opacity-90">
-                <h4 className='text-center text-2xl font-bold'>Sign Up</h4>
-                <form className="w-full *:w-full *:mb-10 *:rounded-lg *:outline-none" onSubmit={signUpHandler}>
-                    <label htmlFor="email">Email</label>
-                    <input type="email" id='email' className="p-2 bg-zinc-300" ref={emailRef} />
-                    <label htmlFor="password">Password</label>
-                    <input type="password" id='password' className="p-2 bg-zinc-300" ref={passwordRef} />
-                    <label htmlFor="confirm-password">Confirm Password</label>
-                    <input type="text" id='confirm-password' className="p-2 bg-zinc-300" ref={confirmPasswordRef} />
+            <div className="relative w-full h-full md:h-auto md:max-w-128 mx-auto py-8 px-10 bg-transparent md:rounded-md">
+                <h4 className='text-center text-2xl font-bold text-white'>Sign Up</h4>
+                <form className="w-full *:w-full *:mb-7 md:*:mb-10 *:rounded-lg *:outline-none" onSubmit={signUpHandler}>
+                    <label htmlFor="email" className='text-white'>Email</label>
+                    <input type="email" id='email' className="p-2" ref={emailRef} />
+                    <label htmlFor="password" className='text-white'>Password</label>
+                    <input type="password" id='password' className="p-2" ref={passwordRef} />
+                    <label htmlFor="confirm-password" className='text-white'>Confirm Password</label>
+                    <input type="text" id='confirm-password' className="p-2" ref={confirmPasswordRef} />
                     <input type="submit" value="Submit" className="bg-red-500 hover:bg-red-600 text-white py-3" />
                 </form>
-                <p className='text-center'><Link to="/login">Already have an account?</Link></p>
+                <p className='text-center text-white'><Link to="/login">Already have an account?</Link></p>
             </div>
         </div>
     )

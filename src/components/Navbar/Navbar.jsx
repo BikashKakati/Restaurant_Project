@@ -1,6 +1,4 @@
-import { UserCircleIcon } from "@heroicons/react/24/outline";
-import { ShoppingCartIcon } from "@heroicons/react/24/solid";
-import { PhoneIcon } from "@heroicons/react/24/solid";
+import { ShoppingCartIcon, HomeIcon, UserCircleIcon } from "@heroicons/react/24/solid";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import Wrapper from "../Ui/Wrapper";
 import { useSelector } from "react-redux";
@@ -25,29 +23,26 @@ function Navbar() {
 
                 <ul className="fixed left-0 bottom-0 w-full  bg-zinc-800 md:relative md:w-auto md:bg-transparent flex items-center justify-around  md:justify-center md:space-x-5 font-medium transition-all">
                     <li className="px-5 py-3 md:hover:nav-hover">
-                        {
-                            currentUser ?
-                                <Link to="/profile" className="flex items-center flex-col">
-                                    <UserCircleIcon className="h-7 w-7" />
-                                    <span className="text-xs">profile</span>
-                                </Link>
-                                :
-                                <Link to="/login" className="text-nowrap">Login</Link>
-                        }
+                        <NavLink to="/" className="flex flex-col items-center">
+                            <HomeIcon className="h-6 w-6" />
+                            <span className="text-xs">Home</span>
+                        </NavLink>
                     </li>
-                    {currentUser && <li className="relative px-5 py-3 md:hover:nav-hover">
-                        <NavLink to={"/cart"} className="flex flex-col ">
+                    <li className="px-5 py-3 md:hover:nav-hover">
+
+                        <Link to="/profile" className="flex items-center flex-col">
+                            <UserCircleIcon className="h-7 w-7" />
+                            <span className="text-xs">profile</span>
+                        </Link>
+                    </li>
+                    <li className="relative px-5 py-3 md:hover:nav-hover">
+                        <NavLink to={"/cart"} className="flex flex-col items-center">
                             <ShoppingCartIcon className="h-6 w-6" />
                             <span className="absolute right-0 top-0 py-.5 px-2 rounded-full bg-red-600">{mealsQuantity}</span>
                             <span className="text-xs">cart</span>
                         </NavLink>
-                    </li>}
-                    <li className="px-5 py-3 md:hover:nav-hover">
-                        <NavLink to={"#"} className="flex flex-col">
-                            <PhoneIcon className="h-6 w-6" />
-                            <span className="text-xs">contact</span>
-                        </NavLink>
                     </li>
+
                 </ul>
             </Wrapper>
         </nav>
