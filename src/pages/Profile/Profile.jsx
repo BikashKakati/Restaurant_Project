@@ -1,9 +1,8 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { handleLogOut } from '../../services/redux/slices/authSlice';
 import Wrapper from '../../components/Ui/Wrapper';
-import Footer from '../../components/Footer/Footer';
+import { handleLogOut } from '../../services/redux/slices/authSlice';
 
 function Profile() {
     const {currentUser} = useSelector(state => state.auth);
@@ -27,7 +26,6 @@ function Profile() {
                     </button>
                 </div>
             </Wrapper>
-            <Footer/>
         </div>
     )
 }
