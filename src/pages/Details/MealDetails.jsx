@@ -13,6 +13,10 @@ function MealDetails() {
     const { id } = useParams();
     const { data, loading } = useFetch(`lookup.php?i=${id}`);
 
+    useEffect(() => {
+        window.scroll(0, 0);
+    }, [])
+
     const mealData = data?.meals ? data.meals[0] : {};
     const { strArea: place = "place", strCategory: category = "category", strMeal: name = "name", strMealThumb: image = "image", strInstructions: details = "details" } = mealData;
     
@@ -20,15 +24,12 @@ function MealDetails() {
 
     const ingredients = Object.entries(mealData).filter(ele => {
         // to filter out other data and blank ingredient
-        if (ele[0].includes("strIngredient") && ele[1].length) {
+        if (ele[0]?.includes("strIngredient") && ele[1]?.length) {
             return ele;
         }
     })
 
 
-    useEffect(() => {
-        window.scroll(0, 0);
-    }, [])
 
     function handleAddToCart() {
         dispatch(setCarts({

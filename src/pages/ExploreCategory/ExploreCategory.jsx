@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+import { Fragment, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Card from "../../components/Card/Card";
 import { CardSkeletonMultiple } from "../../components/Card/CardSkeletonMultiple";
@@ -8,6 +8,11 @@ import { useFetch } from "../../hook/useFetch";
 function ExploreCategory() {
     const { catvarient } = useParams();
     const { data, loading } = useFetch(`filter.php?c=${catvarient}`);
+
+    useEffect(() => {
+        window.scroll(0, 0);
+    }, [])
+
     return (
         <div className="w-full min-h-dvh pt-20">
             <Wrapper className="mb-20">

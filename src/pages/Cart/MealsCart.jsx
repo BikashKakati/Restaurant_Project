@@ -2,9 +2,14 @@ import { useSelector } from "react-redux";
 import emptyCartFallback from "../../assets/emptyCart.webp";
 import Wrapper from "../../components/Ui/Wrapper";
 import CartMealCard from "./CartMealCard";
+import { useEffect } from "react";
 
 function MealsCart() {
     const {cartDetails, totalAmount} = useSelector(state => state.cart);
+
+    useEffect(() => {
+        window.scroll(0, 0);
+    }, [])
     return (
         <div className="relative w-full min-h-dvh pt-20">
             <Wrapper className="h-full mb-32 md:mb-10">

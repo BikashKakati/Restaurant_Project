@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import Wrapper from '../../components/Ui/Wrapper';
@@ -8,6 +8,10 @@ function Profile() {
     const {currentUser} = useSelector(state => state.auth);
     const dispatch = useDispatch();
     const Navigate = useNavigate();
+
+    useEffect(() => {
+        window.scroll(0, 0);
+    }, [])
 
     function handleLogout() {
         dispatch(handleLogOut());
