@@ -22,7 +22,7 @@ function Navbar() {
                 {currentUser && <p className="font-semibold md:mr-4">Welcome {currentUser?.email}</p>}
 
                 <ul className="fixed left-0 bottom-0 w-full  bg-zinc-800 md:relative md:w-auto md:bg-transparent flex items-center justify-around  md:justify-center md:space-x-5 font-medium transition-all">
-                    <li className="px-5 py-3 md:hover:nav-hover">
+                    <li className="px-5 py-3 md:hover:nav-hover md:hidden">
                         <NavLink to="/" className="flex flex-col items-center">
                             <HomeIcon className="h-6 w-6" />
                             <span className="text-xs">Home</span>
