@@ -33,10 +33,11 @@ function SignupForm() {
     }
 
     return (
-        <div className="w-full min-h-dvh pt-20">
-            <div className="relative w-full h-full md:h-auto mb-20 md:max-w-128 mx-auto py-8 px-10 md:shadow-custom bg-white rounded-md">
+        <div className="w-full min-h-dvh pt-20 bg-[url('/food.avif')]">
+            <div className="bg-overlay"></div>
+            <div className="relative w-full h-full md:h-auto mb-20 md:max-w-128 mx-auto py-8 px-10 md:shadow-custom bg-white rounded-md opacity-90">
                 <h4 className='text-center text-2xl font-bold'>Sign Up</h4>
-                <form className="w-full *:w-full *:mb-10 *:rounded-lg" onSubmit={signUpHandler}>
+                <form className="w-full *:w-full *:mb-10 *:rounded-lg *:outline-none" onSubmit={signUpHandler}>
                     <label htmlFor="email">Email</label>
                     <input type="email" id='email' className="p-2 bg-zinc-300" ref={emailRef} />
                     <label htmlFor="password">Password</label>
