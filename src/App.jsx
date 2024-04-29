@@ -23,7 +23,10 @@ function App() {
   const { currentUser } = useSelector(state => state.auth);
 
   useEffect(() => {
-    dispatch(getAllMeals());
+    handleGetAllMeal();
+    async function handleGetAllMeal(){
+      await dispatch(getAllMeals()).unwrap();
+    }
   }, [currentUser])
 
   return (

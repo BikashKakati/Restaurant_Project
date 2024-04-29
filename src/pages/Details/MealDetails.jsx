@@ -31,15 +31,17 @@ function MealDetails() {
 
 
 
-    function handleAddToCart() {
-        dispatch(setCarts({
+    async function handleAddToCart() {
+        toast.loading("Loading...");
+        await dispatch(setCarts({
             id,
             name,
             image,
             category,
             quantity: 1,
             price: mealPrice,
-        }))
+        })).unwrap();
+        toast.remove();
         toast.success("meal added to cart");
     }
 

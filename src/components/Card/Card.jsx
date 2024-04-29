@@ -16,7 +16,7 @@ function Card({ mealData, cat }) {
     const imageLink = mealData?.strMealThumb ? image : fallBackImg;
     const mealPrice = Number(id.slice(2));
 
-    const handleAddToCart = () => {
+    const handleAddToCart = async() => {
         const enteredQuantity = Number(quantityRef.current.value);
         if(isNaN(enteredQuantity) || !enteredQuantity){
             toast.error("invalid quantity!");
@@ -26,14 +26,16 @@ function Card({ mealData, cat }) {
             toast.error("please reduce the quantity!");
             return;
         }
-        dispatch(setCarts({
+        toast.loading("Loading...");
+        await dispatch(setCarts({
             id,
             name,
             image,
             category:realCategory,
             quantity:enteredQuantity,
             price: mealPrice,
-        }))
+        })).unwrap()
+        toast.remove();
         toast.success("meal added to cart");
     }
 

@@ -5,18 +5,20 @@ import { removeCarts, removeWholeCart, setCarts } from "../../services/redux/api
 
 function CartMealCard({ cartMeal }) {
     const dispatch = useDispatch();
-    const handleAddToCart = () => {
-        dispatch(setCarts({...cartMeal, quantity: 1}));
+
+    const handleAddToCart = async() => {
+        await dispatch(setCarts({...cartMeal, quantity: 1})).unwrap();
     }
-    const handleRemoveFromCart = (mealId) => {
+
+    const handleRemoveFromCart = async(mealId) => {
         if(cartMeal?.quantity > 1){
-            dispatch(removeCarts(mealId));
+            await dispatch(removeCarts(mealId)).unwrap();
         }else{
-            dispatch(removeWholeCart(mealId));
+            await dispatch(removeWholeCart(mealId)).unwrap();
         }
     }
-    const handleRemoveWholeMeal = (mealId) =>{
-        dispatch(removeWholeCart(mealId))
+    const handleRemoveWholeMeal = async(mealId) =>{
+        await dispatch(removeWholeCart(mealId)).unwrap();
     }
     return (
         <div className="w-full flex items-center justify-between gap-5 p-4 border-b-2 flex-wrap">
