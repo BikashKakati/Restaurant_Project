@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import Wrapper from '../../components/Ui/Wrapper';
-import { handleLogOut } from '../../services/redux/slices/authSlice';
+import Wrapper from '../../../components/Ui/Wrapper';
+import { handleLogOut } from '../../../services/redux/slices/authSlice';
 
 function Profile() {
     const {currentUser} = useSelector(state => state.auth);
@@ -15,7 +15,7 @@ function Profile() {
 
     function handleLogout() {
         dispatch(handleLogOut());
-        Navigate("/login");
+        Navigate("/");
     }
     return (
         <div className="w-full min-h-dvh pt-20">

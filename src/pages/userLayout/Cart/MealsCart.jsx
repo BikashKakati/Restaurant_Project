@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
-import emptyCartFallback from "../../assets/emptyCart.webp";
-import Wrapper from "../../components/Ui/Wrapper";
+import emptyCartFallback from "../../../assets/emptyCart.webp";
+import Wrapper from "../../../components/Ui/Wrapper";
 import CartMealCard from "./CartMealCard";
 import { useEffect } from "react";
 

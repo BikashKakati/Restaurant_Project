@@ -1,9 +1,9 @@
 import { Fragment, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import Card from "../../components/Card/Card";
-import { CardSkeletonMultiple } from "../../components/Card/CardSkeletonMultiple";
-import Wrapper from "../../components/Ui/Wrapper";
-import { useFetch } from "../../hook/useFetch";
+import Card from "../../../components/Card/Card";
+import { CardSkeletonMultiple } from "../../../components/Card/CardSkeletonMultiple";
+import Wrapper from "../../../components/Ui/Wrapper";
+import { useFetch } from "../../../hook/useFetch";
 
 function ExploreCategory() {
     const { catvarient } = useParams();

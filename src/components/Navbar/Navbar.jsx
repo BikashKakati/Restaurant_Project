@@ -1,12 +1,14 @@
 import { ShoppingCartIcon, HomeIcon, UserCircleIcon } from "@heroicons/react/24/solid";
-import { Link, NavLink, useLocation } from "react-router-dom";
+import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import Wrapper from "../Ui/Wrapper";
 import { useSelector } from "react-redux";
+import Button from "../Ui/Button";
 
 function Navbar() {
     const location = useLocation();
     const { currentUser } = useSelector(state => state.auth);
     const { cartDetails } = useSelector(state => state.cart);
+    const navigate = useNavigate();
     const mealsQuantity = cartDetails?.reduce((initialQantity, cartMeal) => {
         return initialQantity + cartMeal.quantity;
     }, 0)
@@ -28,13 +30,20 @@ function Navbar() {
                             <span className="text-xs">Home</span>
                         </NavLink>
                     </li>
-                    <li className="px-5 py-3 md:hover:nav-hover">
+                    {
+                        currentUser ?
+                       ( <li className="px-5 py-3 md:hover:nav-hover">
 
                         <Link to="/profile" className="flex items-center flex-col">
                             <UserCircleIcon className="h-7 w-7" />
                             <span className="text-xs">profile</span>
                         </Link>
-                    </li>
+                    </li>)
+                    :
+                    (
+                        <Button onClick={()=>{navigate("/login")}}>Login</Button>
+                    )
+                    }
                     <li className="relative px-5 py-3 md:hover:nav-hover">
                         <NavLink to={"/cart"} className="flex flex-col items-center">
                             <ShoppingCartIcon className="h-6 w-6" />

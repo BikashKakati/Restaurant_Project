@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
-import Card from "../../components/Card/Card";
-import { CardSkeletonMultiple } from "../../components/Card/CardSkeletonMultiple";
-import Wrapper from "../../components/Ui/Wrapper";
-import { fetchApiData } from "../../services/Api";
+import Card from "../../../components/Card/Card";
+import { CardSkeletonMultiple } from "../../../components/Card/CardSkeletonMultiple";
+import Wrapper from "../../../components/Ui/Wrapper";
+import { fetchApiData } from "../../../services/Api";
 
 function AllMeals() {
     const [alphabet, setAlphabet] = useState(97);

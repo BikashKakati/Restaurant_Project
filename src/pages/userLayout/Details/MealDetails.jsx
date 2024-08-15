@@ -3,10 +3,10 @@ import { useEffect } from "react";
 import { toast } from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
-import { Loader } from "../../components/Ui/Loader";
-import Wrapper from "../../components/Ui/Wrapper";
-import { useFetch } from "../../hook/useFetch";
-import { setCarts } from "../../services/redux/api/cartThunks";
+import { Loader } from "../../../components/Ui/Loader";
+import Wrapper from "../../../components/Ui/Wrapper";
+import { useFetch } from "../../../hook/useFetch";
+import { setCarts } from "../../../services/redux/api/cartThunks";
 
 function MealDetails() {
     const dispatch = useDispatch();

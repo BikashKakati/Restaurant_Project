@@ -1,6 +1,6 @@
 import { MinusIcon, PlusIcon } from "@heroicons/react/24/solid";
 import { useDispatch } from "react-redux";
-import { removeCarts, removeWholeCart, setCarts } from "../../services/redux/api/cartThunks";
+import { removeCarts, removeWholeCart, setCarts } from "../../../services/redux/api/cartThunks";
 
 
 function CartMealCard({ cartMeal }) {
