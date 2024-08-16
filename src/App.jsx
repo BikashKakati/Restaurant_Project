@@ -15,11 +15,14 @@ import { Loader } from "./components/Ui/Loader";
 import Modal from "./components/Ui/Modal";
 import UserLayout from "./pages/userLayout/UserLayout";
 import { getAllMeals } from "./services/redux/api/cartThunks";
+import { Toaster } from "react-hot-toast";
+import { Dialog } from "./components/Ui/Dialog";
 
 
 function App() {
   const dispatch = useDispatch();
-  const { currentUser } = useSelector(state => state.auth);
+  const { currentUser, authModelOn } = useSelector(state => state.auth);
+  console.log(authModelOn);
 
   useEffect(() => {
     handleGetAllMeal();
@@ -30,7 +33,15 @@ function App() {
 
   return (
     <div className="relative w-full">
-      <Modal />
+      <Modal >
+        <Toaster position="top-center" />
+      </Modal>
+      {
+        authModelOn &&
+        <Modal>
+          <Dialog />
+        </Modal>
+      }
       <Suspense fallback={<Loader initial={true} />}>
         <Routes>
           <Route path="/login" element={<LogInForm />} />

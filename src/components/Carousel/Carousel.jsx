@@ -21,29 +21,16 @@ function Carousel() {
                     spaceBetween={40}>
                     {
                         loading ?
-                            (
-                                <div className="flex overflow-hidden flex-nowrap gap-10">
-                                    <CarouselSkeleton />
-                                    <CarouselSkeleton />
-                                    <CarouselSkeleton />
-                                    <CarouselSkeleton />
-                                    <CarouselSkeleton />
-                                </div>
-                            )
+                            
+                            <MultipleCarouselSkeleton/>
                             :
-                            (
-                                <>
-                                    {
-                                        data?.categories?.map((category) => {
-                                            return (
-                                                <SwiperSlide key={category?.idCategory} style={{width:"11rem"}}>
-                                                    <CarouselCard cardData={category} />
-                                                </SwiperSlide>
-                                            )
-                                        })
-                                    }
-                                </>
-                            )
+                            data?.categories?.map((category) => {
+                                return (
+                                    <SwiperSlide key={category?.idCategory} style={{ width: "11rem" }}>
+                                        <CarouselCard cardData={category} />
+                                    </SwiperSlide>
+                                )
+                            })
                     }
                 </Swiper>
             </Wrapper>
@@ -52,3 +39,15 @@ function Carousel() {
 }
 
 export default Carousel
+
+function MultipleCarouselSkeleton() {
+    return (
+        <div className="flex overflow-hidden flex-nowrap gap-10">
+            <CarouselSkeleton />
+            <CarouselSkeleton />
+            <CarouselSkeleton />
+            <CarouselSkeleton />
+            <CarouselSkeleton />
+        </div>
+    )
+}

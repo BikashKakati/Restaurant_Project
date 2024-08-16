@@ -9,11 +9,15 @@ const authSlice = createSlice({
     name:"auth",
     initialState:{
         currentUser:JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) || null,
+        authModelOn:false,
     },
     reducers:{
         handleLogOut:(state)=>{
             state.currentUser = null;
             localStorage.setItem(LOCAL_STORAGE_KEY,null);
+        },
+        setAuthModel:(state,action)=>{
+            state.authModelOn = action.payload;
         }
     },
     extraReducers:(builder)=>{
@@ -32,4 +36,4 @@ const authSlice = createSlice({
 })
 
 export default authSlice.reducer
-export const {handleLogOut} = authSlice.actions
+export const {handleLogOut, setAuthModel} = authSlice.actions

@@ -1,10 +1,9 @@
-import {createPortal} from "react-dom";
-import { Toaster } from "react-hot-toast";
+import { createPortal } from "react-dom";
 
-function Modal() {
+function Modal({children}) {
     const portalElement = document.querySelector("#overlays");
     return ( 
-        createPortal(<Toaster position="top-center"/>, portalElement)
+        createPortal(children, portalElement)
     )
 }
 export default Modal;

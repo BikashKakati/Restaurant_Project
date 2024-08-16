@@ -1,13 +1,15 @@
 import { ShoppingCartIcon, HomeIcon, UserCircleIcon } from "@heroicons/react/24/solid";
 import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import Wrapper from "../Ui/Wrapper";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Button from "../Ui/Button";
+import { setAuthModel } from "../../services/redux/slices/authSlice";
 
 function Navbar() {
     const location = useLocation();
     const { currentUser } = useSelector(state => state.auth);
     const { cartDetails } = useSelector(state => state.cart);
+    const dispatch = useDispatch();
     const navigate = useNavigate();
     const mealsQuantity = cartDetails?.reduce((initialQantity, cartMeal) => {
         return initialQantity + cartMeal.quantity;
@@ -32,17 +34,19 @@ function Navbar() {
                     </li>
                     {
                         currentUser ?
-                       ( <li className="px-5 py-3 md:hover:nav-hover">
+                            (<li className="px-5 py-3 md:hover:nav-hover">
 
-                        <Link to="/profile" className="flex items-center flex-col">
-                            <UserCircleIcon className="h-7 w-7" />
-                            <span className="text-xs">profile</span>
-                        </Link>
-                    </li>)
-                    :
-                    (
-                        <Button onClick={()=>{navigate("/login")}}>Login</Button>
-                    )
+                                <Link to="/profile" className="flex items-center flex-col">
+                                    <UserCircleIcon className="h-7 w-7" />
+                                    <span className="text-xs">profile</span>
+                                </Link>
+                            </li>)
+                            :
+                            (
+
+                                // <Button  >Login</Button>
+                                <p className="text-base cursor-pointer" onClick={() => { dispatch(setAuthModel(true)) }}>Log in</p>
+                            )
                     }
                     <li className="relative px-5 py-3 md:hover:nav-hover">
                         <NavLink to={"/cart"} className="flex flex-col items-center">
