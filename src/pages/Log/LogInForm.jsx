@@ -1,38 +1,127 @@
-import React, { useRef } from 'react';
-import { useDispatch } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
-import { handleLogIn } from '../../services/redux/api/authThunks';
+import React, { useRef, useState } from "react";
+import { useDispatch } from "react-redux";
+import googleSvg from "../../assets/google.svg";
+import { Dialog } from "../../components/Ui/Dialog";
+import { handleLogIn } from "../../services/redux/api/authThunks";
+import { handleAddUser, setAuthModel } from "../../services/redux/slices/authSlice";
+import { signInWithPopup } from "firebase/auth";
+import { auth, provider } from "../../services/firebase-config";
 
-function LogInForm() {
-    const emailRef = useRef();
-    const passwordRef = useRef();
-    const Navigate = useNavigate();
-    const dispatch = useDispatch();
+function LogInForm({ setIsLoginMode }) {
+  const [inputData, setInputData] = useState({
+    email: "",
+    password: "",
+  });
+  const dispatch = useDispatch();
 
-    async function submitHandler(e) {
-        e.preventDefault();
-        const email = emailRef.current.value;
-        const password = passwordRef.current.value;
-        await dispatch(handleLogIn({ email, password })).unwrap();
-        Navigate("/");
+  function handleInputChange(e) {
+    const key = e.target.id;
+    const value = e.target.value;
+    setInputData((prev) => ({ ...prev, [key]: value }));
+  }
+
+  async function submitHandler(e) {
+    e.preventDefault();
+    const { email, password } = inputData;
+    try {
+      await dispatch(handleLogIn({ email:email.trim(), password:password.trim() })).unwrap();
+      dispatch(setAuthModel(false));
+    } catch (err) {
+      console.log(err);
     }
+  }
 
-    return (
-        <div className="w-full h-dvh relative md:pt-20 bg-[url('/food.avif')]">
-            <div className="bg-overlay"></div>
-            <div className="relative w-full h-full md:h-auto md:max-w-128 mx-auto py-8 px-10 md:rounded-md bg-transparent">
-                <h4 className='text-center text-2xl font-bold text-white'>Log In</h4>
-                <form className="w-full *:w-full md:*:mb-10 *:mb-10 *:rounded-lg *:outline-none" onSubmit={submitHandler}>
-                    <label htmlFor="email" className='text-white'>Email</label>
-                    <input type="email" id='email' className="p-2" ref={emailRef} />
-                    <label htmlFor="password" className='text-white' >Password</label>
-                    <input type="password" id='password' className="p-2" ref={passwordRef} />
-                    <input type="submit" value="Submit" className="bg-red-500 hover:bg-red-600  py-3 text-white" />
-                </form>
-                <p className='text-center text-white'><Link to="/signup">Create an account? signup</Link></p>
-            </div>
+  async function handleSignUpWithGoogle() {
+    try {
+      const { user } = await signInWithPopup(auth, provider);
+      dispatch(
+        handleAddUser({
+          email: user?.email,
+          isVerified: user?.emailVerified,
+          uid: user?.uid,
+          photoUrl: user?.photoURL,
+          name: user?.displayName,
+        })
+      );
+      dispatch(setAuthModel(false));
+    } catch (err) {
+      console.log("erro while signin with google",err?.message);
+    }
+  }
+
+  return (
+    <Dialog
+      headerData={"Login"}
+      footerData={
+        <FooterData
+          onClick={() => {
+            setIsLoginMode(false);
+          }}
+        />
+      }
+    >
+      <form
+        className="w-full *:w-full *:mb-5 *:rounded-lg *:outline-none"
+        onSubmit={submitHandler}
+      >
+        <label htmlFor="email" className="sr-only">
+          Email
+        </label>
+        <input
+          type="email"
+          id="email"
+          placeholder="Email"
+          className="p-2 border"
+          value={inputData.email}
+          onChange={handleInputChange}
+        />
+        <label htmlFor="password" className="sr-only">
+          Password
+        </label>
+        <input
+          type="password"
+          id="password"
+          placeholder="Password"
+          className="p-2 border"
+          value={inputData.password}
+          onChange={handleInputChange}
+        />
+        <button
+          type="submit"
+          className="bg-red-500 hover:bg-red-600 py-3 text-white disabled:bg-zinc-300"
+          disabled={!inputData.email || !inputData.password}
+        >
+          Submit
+        </button>
+      </form>
+      <div className="h-[1px] w-full bg-zinc-200 relative">
+        <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 px-4 bg-white">
+          or
+        </span>
+      </div>
+      <button className="w-full mt-[1rem] flex items-center justify-center gap-3 py-3 border rounded-lg" onClick={handleSignUpWithGoogle}>
+        <div className="w-4 h-4">
+          <img
+            src={googleSvg}
+            alt="google image"
+            className="w-full h-full object-contain object-center"
+          />
         </div>
-    )
+        <p className="">Sign in with Google</p>
+      </button>
+    </Dialog>
+  );
 }
 
-export default LogInForm
+export default LogInForm;
+
+function FooterData({ onClick }) {
+  return (
+    <>
+      New to Foodauto?&nbsp;
+      <span className="text-red-500 cursor-pointer" onClick={onClick}>
+        Create account
+      </span>
+    </>
+  );
+}

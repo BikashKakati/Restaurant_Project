@@ -44,7 +44,7 @@ const cartSlice = createSlice({
         })
         builder.addCase(getAllMeals.fulfilled,(state, action) =>{
             state.cartDetails = action.payload;
-            state.totalAmount = state.cartDetails.reduce((ini,curr) => ini + (curr.quantity * curr.price),0);
+            state.totalAmount = state.cartDetails?.reduce((ini,curr) => ini + (curr.quantity * curr.price),0);
         })
 
     }

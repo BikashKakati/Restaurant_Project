@@ -25,7 +25,7 @@ function MealsCart() {
                             </>
                         }
                         {
-                            cartDetails.map(cartMeal => {
+                            cartDetails?.map(cartMeal => {
                                 return (
                                     <CartMealCard key={cartMeal?.id} cartMeal={cartMeal} />
                                 )

@@ -4,7 +4,8 @@ import { db } from "../../firebase-config";
 
 export const setCarts = createAsyncThunk(
     "cart/setCarts",
-    async function (mealDetails,{getState}) {
+    async function (mealDetails,store) {
+        const {getState} = store;
         const userId = getState().auth.currentUser?.uid;
         const cartData = getState().cart.cartDetails;
         const existingMealIdx = cartData.findIndex(cart => cart.id === mealDetails.id);

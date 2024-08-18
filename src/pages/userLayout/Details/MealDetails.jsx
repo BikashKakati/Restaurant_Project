@@ -1,15 +1,17 @@
 import { ShoppingCartIcon } from "@heroicons/react/24/solid";
 import { useEffect } from "react";
 import { toast } from "react-hot-toast";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { Loader } from "../../../components/Ui/Loader";
 import Wrapper from "../../../components/Ui/Wrapper";
 import { useFetch } from "../../../hook/useFetch";
 import { setCarts } from "../../../services/redux/api/cartThunks";
+import { setAuthModel } from "../../../services/redux/slices/authSlice";
 
 function MealDetails() {
     const dispatch = useDispatch();
+    const {currentUser} = useSelector((state)=> state.auth);
     const { id } = useParams();
     const { data, loading } = useFetch(`lookup.php?i=${id}`);
 
@@ -32,6 +34,10 @@ function MealDetails() {
 
 
     async function handleAddToCart() {
+        if(!currentUser){
+            dispatch(setAuthModel(true));
+            return;
+        }
         toast.loading("Loading...");
         await dispatch(setCarts({
             id,
