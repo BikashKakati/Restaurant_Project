@@ -26,11 +26,11 @@ function Navbar() {
       } block top-0 left-0 z-20`}
     >
       <Wrapper className="flex items-center justify-between text-white">
-        <div className="p-3 mr-6 md:mr-0 md:hover:nav-hover cursor-pointer transition-all">
-          <NavLink to={"/"}>
+        <NavLink to={"/"}>
+          <div className="p-3 mr-6 md:mr-0 md:hover:nav-hover cursor-pointer transition-all">
             <span className="text-3xl font-semibold">FoodAuto</span>
-          </NavLink>
-        </div>
+          </div>
+        </NavLink>
 
         {currentUser && (
           <p className="font-semibold md:mr-4">

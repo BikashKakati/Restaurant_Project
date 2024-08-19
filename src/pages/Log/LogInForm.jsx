@@ -59,6 +59,7 @@ function LogInForm({ setIsLoginMode }) {
           }}
         />
       }
+      onCloseModel={() => { dispatch(setAuthModel(false)) }}
     >
       <form
         className="w-full *:w-full *:mb-5 *:rounded-lg *:outline-none"

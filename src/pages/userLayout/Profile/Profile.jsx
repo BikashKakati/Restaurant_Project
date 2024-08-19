@@ -26,7 +26,7 @@ function Profile() {
         <div className="w-full min-h-dvh pt-20">
             <Wrapper className="mb-20">
             <div className="max-w-[50rem] min-h-32 bg-white shadow-custom mx-auto p-6 rounded-lg">
-            <div className="flex items-center space-x-6 mb-6">
+            <div className="flex items-center justify-center flex-col md:flex-row md:justify-normal space-x-6 mb-6">
                 <img
                     src={currentUser?.photoUrl || profileImg}
                     alt="Profile"
@@ -42,15 +42,15 @@ function Profile() {
                     )}
                 </div>
             </div>
-            <div className="flex justify-end space-x-4">
+            <div className="flex justify-center md:justify-end space-x-4">
                 <button
-                    className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-6 rounded-lg"
+                    className="bg-blue-500 hover:bg-blue-600 text-nowrap text-white py-2 px-4 md:px-6 rounded-lg"
                     onClick={handleEdit}
                 >
                     Edit Profile
                 </button>
                 <button
-                    className="bg-red-500 hover:bg-red-600 text-white py-2 px-6 rounded-lg"
+                    className="bg-red-500 hover:bg-red-600 text-nowrap text-white py-2 px-4 md:px-6 rounded-lg"
                     onClick={handleLogout}
                 >
                     Log out

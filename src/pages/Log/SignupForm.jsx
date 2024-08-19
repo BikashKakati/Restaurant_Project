@@ -57,7 +57,7 @@ function SignupForm({ setIsLoginMode }) {
       );
       dispatch(setAuthModel(false));
     } catch (err) {
-      console.log("erro while signin with google",err?.message);
+      console.log("erro while signin with google", err?.message);
     }
   }
 
@@ -71,6 +71,9 @@ function SignupForm({ setIsLoginMode }) {
           }}
         />
       }
+      onCloseModel={() => {
+        dispatch(setAuthModel(false));
+      }}
     >
       <form
         className="w-full *:w-full *:mb-5 *:rounded-lg *:outline-none"
