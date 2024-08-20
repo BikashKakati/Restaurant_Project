@@ -6,12 +6,11 @@ import { setAuthModel } from '../../services/redux/slices/authSlice';
 function PrivateRoute({ children }) {
   const { currentUser } = useSelector(state => state.auth);
   const dispatch = useDispatch();
-  if(currentUser){
-    return children
-  }else{
+  if(!currentUser){
     dispatch(setAuthModel(true));
-    return <Navigate to={"/"}/>
+    return null;
   }
+  return children;
 }
 
 export default PrivateRoute
