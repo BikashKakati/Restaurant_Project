@@ -3,14 +3,13 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import Card from "../../../components/Card/Card";
 import { CardSkeletonMultiple } from "../../../components/Card/CardSkeletonMultiple";
 import FilterBtn from "../../../components/FilterDialog/FilterBtn";
+import FilterByForm from "../../../components/FilterDialog/FilterByForm";
 import FilterDialog from "../../../components/FilterDialog/FilterDialog";
+import SortByForm from "../../../components/FilterDialog/SortByForm";
 import Modal from "../../../components/Ui/Modal";
+import Tabs from "../../../components/Ui/Tabs";
 import Wrapper from "../../../components/Ui/Wrapper";
 import { fetchApiData } from "../../../services/Api";
-import { sortByOptions } from "../../../../constant";
-import SortByForm from "../../../components/FilterDialog/SortByForm";
-import { getPrice } from "../../../utils";
-import FilterByForm from "../../../components/FilterDialog/FilterByForm";
 
 function AllMeals() {
   const [alphabet, setAlphabet] = useState(97);
@@ -22,14 +21,14 @@ function AllMeals() {
     fetchInitialData();
   }, []);
 
-  const [selectedSortCallback, setSelectedSortCallback] = useState(undefined);
   const [selectedSortOption, setSelectedSortOption] = useState(null);
+  const [correspondingSortCallback, setCorrespondingSortCallback] = useState(undefined);
   const [selectedFilterOption, setSelectedFilterOption] = useState("");
-  const [addFilter, setAddFilter] = useState("");
+  const [finalAddedFilter, setFinalAddedFilter] = useState("");
 
   function handleApplySort() {
-    selectedSortOption && setSelectedSortCallback(() => selectedSortOption?.method);
-    !!selectedFilterOption && setAddFilter(selectedFilterOption);
+    !!selectedSortOption && setCorrespondingSortCallback(() => selectedSortOption?.method);
+    !!selectedFilterOption && setFinalAddedFilter(selectedFilterOption);
     setIsFilterDialogOpen(false);
   }
 
@@ -71,9 +70,9 @@ function AllMeals() {
             handleApplySort={handleApplySort}
             clearFilter={() => {
               setSelectedSortOption(null);
+              setCorrespondingSortCallback(undefined);
               setSelectedFilterOption("");
-              setAddFilter("");
-              setSelectedSortCallback(undefined);
+              setFinalAddedFilter("");
             }}
           >
             <SortByForm
@@ -85,6 +84,7 @@ function AllMeals() {
               setSelectedFilterOption={setSelectedFilterOption}
               referenceData={mealData || []}
             />
+            <Tabs/>
           </FilterDialog>
         </Modal>
       )}
@@ -92,15 +92,14 @@ function AllMeals() {
         <Wrapper>
           {/* filter section */}
           <FilterBtn
-            selectedSortCallback={selectedSortCallback}
+            correspondingSortCallback={correspondingSortCallback}
             selectedSortOption={selectedSortOption}
             setIsFilterDialogOpen={setIsFilterDialogOpen}
-            setSelectedSortCallback={setSelectedSortCallback}
+            setCorrespondingSortCallback={setCorrespondingSortCallback}
             setSelectedSortOption={setSelectedSortOption}
-            setAddFilter = {setAddFilter}
-            addFilter={addFilter}
+            setFinalAddedFilter = {setFinalAddedFilter}
+            finalAddedFilter={finalAddedFilter}
             setSelectedFilterOption = {setSelectedFilterOption}
-            selectedFilterOption = {selectedFilterOption}
           />
 
           <p className="text-3xl mb-4 font-normal">Find All Meals Here</p>
@@ -118,10 +117,10 @@ function AllMeals() {
                 [...mealData]
                   ?.filter((meal) =>
                     meal?.strCategory?.includes(
-                      addFilter
+                      finalAddedFilter
                     )
                   )
-                  .sort(selectedSortCallback)
+                  .sort(correspondingSortCallback)
                   ?.map((meal) => {
                     return <Card key={meal?.idMeal} mealData={meal || {}} />;
                   })}

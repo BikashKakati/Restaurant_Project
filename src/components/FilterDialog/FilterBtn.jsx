@@ -6,22 +6,21 @@ import { getPrice } from "../../utils";
 
 function FilterBtn({
   setIsFilterDialogOpen,
-  selectedSortCallback,
+  correspondingSortCallback,
   selectedSortOption,
-  setSelectedSortCallback,
+  setCorrespondingSortCallback,
   setSelectedSortOption,
   setSelectedFilterOption,
-  selectedFilterOption,
-  setAddFilter,
-  addFilter
+  setFinalAddedFilter,
+  finalAddedFilter
 }) {
   function handleDirectAddSort() {
     setSelectedSortOption(sortByOptions[0]);
-    setSelectedSortCallback(() => sortByOptions[0].method);
+    setCorrespondingSortCallback(() => sortByOptions[0].method);
   }
-  function handleDirectAddFilter(){
-    setAddFilter("Chicken");
-    setSelectedFilterOption("Chicken");
+  function handleDirectAddFilter(category){
+    setFinalAddedFilter(category);
+    setSelectedFilterOption(category);
   }
 
   return (
@@ -32,20 +31,21 @@ function FilterBtn({
           setIsFilterDialogOpen(true);
         }}
       >
-        {!selectedSortCallback ? (
+        {/* to showing the no. of filters otherwise filter icon */}
+        {!correspondingSortCallback ? (
           <AdjustmentsHorizontalIcon className="h-4 w-4" />
         ) : (
           <span className="py-[2px] text-white px-2 bg-red-500 rounded-lg">
-            {addFilter && selectedSortCallback ? 2 : 1}
+            {finalAddedFilter && correspondingSortCallback ? 2 : 1}
           </span>
         )}
         <span>Filters</span>
       </button>
 
-      {!!selectedSortCallback ? (
+      {!!correspondingSortCallback ? (
         <Button
           onClose={(e) => {
-            setSelectedSortCallback(undefined);
+            setCorrespondingSortCallback(undefined);
             setSelectedSortOption(null);
             e.stopPropagation();
           }}
@@ -53,6 +53,7 @@ function FilterBtn({
           {selectedSortOption?.label}
         </Button>
       ) : (
+        //for default sort option
         <button
           onClick={handleDirectAddSort}
           className="px-3 py-[6px] border border-zinc-300 rounded-lg flex space-x-2 items-center"
@@ -60,19 +61,20 @@ function FilterBtn({
           {sortByOptions[0].label}
         </button>
       )}
-      {!!addFilter ? (
+
+      {!!finalAddedFilter ? (
         <Button
           onClose={(e) => {
-            setAddFilter("");
+            setFinalAddedFilter("");
             setSelectedFilterOption("");
             e.stopPropagation();
           }}
         >
-          {addFilter}
+          {finalAddedFilter}
         </Button>
       ) : (
         <button
-          onClick={handleDirectAddFilter}
+          onClick={()=>{handleDirectAddFilter("Chicken")}}
           className="px-3 py-[6px] border border-zinc-300 rounded-lg flex space-x-2 items-center"
         >
           Chicken
