@@ -9,6 +9,8 @@ import Wrapper from "../../../components/Ui/Wrapper";
 import { fetchApiData } from "../../../services/Api";
 import { sortByOptions } from "../../../../constant";
 import SortByForm from "../../../components/FilterDialog/SortByForm";
+import { getPrice } from "../../../utils";
+import FilterByForm from "../../../components/FilterDialog/FilterByForm";
 
 function AllMeals() {
   const [alphabet, setAlphabet] = useState(97);
@@ -21,37 +23,13 @@ function AllMeals() {
   }, []);
 
   const [selectedSortCallback, setSelectedSortCallback] = useState(undefined);
-  const [selectedSortOption, setSelectedSortOption] = useState({});
-
-  function getPrice(rawData) {
-    return Number(rawData?.slice(2));
-  }
+  const [selectedSortOption, setSelectedSortOption] = useState(null);
+  const [selectedFilterOption, setSelectedFilterOption] = useState("");
+  const [addFilter, setAddFilter] = useState("");
 
   function handleApplySort() {
-    switch (selectedSortOption?.value) {
-      case "lowToHigh":
-        setSelectedSortCallback(
-          () => (a, b) => getPrice(a?.idMeal) - getPrice(b?.idMeal)
-        );
-        break;
-      case "highToLow":
-        setSelectedSortCallback(
-          () => (a, b) => getPrice(b?.idMeal) - getPrice(a?.idMeal)
-        );
-        break;
-      case "atoz":
-        setSelectedSortCallback(
-          () => (a, b) => a?.strMeal?.localeCompare(b?.strMeal)
-        );
-        break;
-      case "ztoa":
-        setSelectedSortCallback(
-          () => (a, b) => b?.strMeal?.localeCompare(a?.strMeal)
-        );
-        break;
-      default:
-        setSelectedSortCallback(undefined);
-    }
+    selectedSortOption && setSelectedSortCallback(() => selectedSortOption?.method);
+    !!selectedFilterOption && setAddFilter(selectedFilterOption);
     setIsFilterDialogOpen(false);
   }
 
@@ -93,12 +71,19 @@ function AllMeals() {
             handleApplySort={handleApplySort}
             clearFilter={() => {
               setSelectedSortOption(null);
+              setSelectedFilterOption("");
+              setAddFilter("");
               setSelectedSortCallback(undefined);
             }}
           >
             <SortByForm
               selectedSortOption={selectedSortOption}
               setSelectedSortOption={setSelectedSortOption}
+            />
+            <FilterByForm
+              selectedFilterOption={selectedFilterOption}
+              setSelectedFilterOption={setSelectedFilterOption}
+              referenceData={mealData || []}
             />
           </FilterDialog>
         </Modal>
@@ -112,6 +97,10 @@ function AllMeals() {
             setIsFilterDialogOpen={setIsFilterDialogOpen}
             setSelectedSortCallback={setSelectedSortCallback}
             setSelectedSortOption={setSelectedSortOption}
+            setAddFilter = {setAddFilter}
+            addFilter={addFilter}
+            setSelectedFilterOption = {setSelectedFilterOption}
+            selectedFilterOption = {selectedFilterOption}
           />
 
           <p className="text-3xl mb-4 font-normal">Find All Meals Here</p>
@@ -119,16 +108,23 @@ function AllMeals() {
             {loading && <CardSkeletonMultiple />}
 
             <InfiniteScroll
-              className="flex pt-4 items-start justify-center flex-row flex-wrap gap-6"
+              className="flex h-full pt-4 pb-16 items-start justify-center flex-row flex-wrap gap-6"
               dataLength={mealData?.length || 0}
               next={fetchNextData}
               hasMore={alphabet <= 111}
               loader={<CardSkeletonMultiple />}
             >
               {!loading &&
-                [...mealData]?.sort(selectedSortCallback)?.map((meal) => {
-                  return <Card key={meal?.idMeal} mealData={meal || {}} />;
-                })}
+                [...mealData]
+                  ?.filter((meal) =>
+                    meal?.strCategory?.includes(
+                      addFilter
+                    )
+                  )
+                  .sort(selectedSortCallback)
+                  ?.map((meal) => {
+                    return <Card key={meal?.idMeal} mealData={meal || {}} />;
+                  })}
             </InfiniteScroll>
           </div>
         </Wrapper>

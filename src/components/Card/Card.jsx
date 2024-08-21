@@ -7,6 +7,7 @@ import fallBackImg from "../../assets/NoImageFallback.svg.png";
 import { setCarts } from "../../services/redux/api/cartThunks";
 import { LazyLoadImg } from "../Ui/LazyLoadImage";
 import { setAuthModel } from "../../services/redux/slices/authSlice";
+import { getPrice } from "../../utils";
 
 function Card({ mealData, cat }) {
   const quantityRef = useRef();
@@ -21,7 +22,7 @@ function Card({ mealData, cat }) {
   } = mealData;
   const realCategory = category ? category : cat;
   const imageLink = mealData?.strMealThumb ? image : fallBackImg;
-  const mealPrice = Number(id.slice(2));
+  const mealPrice = getPrice(id);
 
   const handleAddToCart = async () => {
     if (!currentUser) {
