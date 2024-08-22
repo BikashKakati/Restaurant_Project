@@ -9,7 +9,7 @@ function PrivateRoute({ children }) {
   const navigate  = useNavigate();
   if(!currentUser){
     dispatch(setAuthModel(true));
-    return navigate(-1);
+    return navigate("/");
   }
   return children;
 }
