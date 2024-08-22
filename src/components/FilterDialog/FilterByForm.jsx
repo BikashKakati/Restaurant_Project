@@ -16,10 +16,9 @@ const FilterByForm = ({
   }
 
   return (
-    <form>
-      <p className="text-lg font-semibold">Filter By</p>
+    <form className="">
       {filterByOptions?.map((options, id) => (
-        <div className="flex items-center space-x-2" key={id}>
+        <div className="flex items-center space-x-3 p-2" key={id}>
           <input
             checked={options === selectedFilterOption}
             type="radio"
@@ -27,7 +26,7 @@ const FilterByForm = ({
             name="filterOptions"
             value={options}
             onChange={handleFilterOptionChange}
-            className="size-4"
+            className="size-4 text-base"
           />
           <label htmlFor={options}>{options}</label>
         </div>

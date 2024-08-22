@@ -22,12 +22,14 @@ function AllMeals() {
   }, []);
 
   const [selectedSortOption, setSelectedSortOption] = useState(null);
-  const [correspondingSortCallback, setCorrespondingSortCallback] = useState(undefined);
+  const [correspondingSortCallback, setCorrespondingSortCallback] =
+    useState(undefined);
   const [selectedFilterOption, setSelectedFilterOption] = useState("");
   const [finalAddedFilter, setFinalAddedFilter] = useState("");
 
   function handleApplySort() {
-    !!selectedSortOption && setCorrespondingSortCallback(() => selectedSortOption?.method);
+    !!selectedSortOption &&
+      setCorrespondingSortCallback(() => selectedSortOption?.method);
     !!selectedFilterOption && setFinalAddedFilter(selectedFilterOption);
     setIsFilterDialogOpen(false);
   }
@@ -61,6 +63,29 @@ function AllMeals() {
       });
   }
 
+  // made an array of objects includes filter by and sort by option
+  const tabsData = [
+    {
+      tabSectionName: "Filter By",
+      component: (
+        <FilterByForm
+          selectedFilterOption={selectedFilterOption}
+          setSelectedFilterOption={setSelectedFilterOption}
+          referenceData={mealData || []}
+        />
+      ),
+    },
+    {
+      tabSectionName: "Sort By",
+      component: (
+        <SortByForm
+          selectedSortOption={selectedSortOption}
+          setSelectedSortOption={setSelectedSortOption}
+        />
+      ),
+    },
+  ];
+
   return (
     <>
       {isFilterDialogOpen && (
@@ -75,16 +100,11 @@ function AllMeals() {
               setFinalAddedFilter("");
             }}
           >
-            <SortByForm
-              selectedSortOption={selectedSortOption}
-              setSelectedSortOption={setSelectedSortOption}
-            />
-            <FilterByForm
+            <Tabs
+              tabsData={tabsData}
               selectedFilterOption={selectedFilterOption}
-              setSelectedFilterOption={setSelectedFilterOption}
-              referenceData={mealData || []}
+              selectedSortOption={selectedSortOption}
             />
-            <Tabs/>
           </FilterDialog>
         </Modal>
       )}
@@ -97,9 +117,9 @@ function AllMeals() {
             setIsFilterDialogOpen={setIsFilterDialogOpen}
             setCorrespondingSortCallback={setCorrespondingSortCallback}
             setSelectedSortOption={setSelectedSortOption}
-            setFinalAddedFilter = {setFinalAddedFilter}
+            setFinalAddedFilter={setFinalAddedFilter}
             finalAddedFilter={finalAddedFilter}
-            setSelectedFilterOption = {setSelectedFilterOption}
+            setSelectedFilterOption={setSelectedFilterOption}
           />
 
           <p className="text-3xl mb-4 font-normal">Find All Meals Here</p>
@@ -116,9 +136,7 @@ function AllMeals() {
               {!loading &&
                 [...mealData]
                   ?.filter((meal) =>
-                    meal?.strCategory?.includes(
-                      finalAddedFilter
-                    )
+                    meal?.strCategory?.includes(finalAddedFilter)
                   )
                   .sort(correspondingSortCallback)
                   ?.map((meal) => {

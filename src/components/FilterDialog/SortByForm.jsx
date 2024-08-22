@@ -10,9 +10,8 @@ const SortByForm = ({setSelectedSortOption,selectedSortOption}) => {
       }
   return (
     <form>
-      <p className="text-lg font-semibold">Sort by</p>
       {sortByOptions.map((options, id) => (
-        <div className="flex items-center space-x-2" key={id}>
+        <div className="flex items-center space-x-2  p-2" key={id}>
           <input
             checked={options.value === selectedSortOption?.value}
             type="radio"
