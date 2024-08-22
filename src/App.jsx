@@ -36,7 +36,7 @@ function App() {
   return (
     <div className="relative w-full">
       <Modal>
-        <Toaster position="top-center" />
+        <Toaster position="top-right" />
       </Modal>
 
       {<Modal>{authModelOn && <AuthDialog />}</Modal>}

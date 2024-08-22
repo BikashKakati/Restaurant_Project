@@ -57,7 +57,7 @@ function SignupForm({ setIsLoginMode }) {
       );
       dispatch(setAuthModel(false));
     } catch (err) {
-      console.log("erro while signin with google",err?.message);
+      console.log("erro while signin with google", err?.message);
     }
   }
 
@@ -71,74 +71,79 @@ function SignupForm({ setIsLoginMode }) {
           }}
         />
       }
+      onCloseModel={() => {
+        dispatch(setAuthModel(false));
+      }}
     >
-      <form
-        className="w-full *:w-full *:mb-5 *:rounded-lg *:outline-none"
-        onSubmit={signUpHandler}
-      >
-        <label htmlFor="email" className="sr-only">
-          Email
-        </label>
-        <input
-          type="email"
-          id="email"
-          placeholder="Email"
-          className="p-2 border"
-          value={inputData.email}
-          onChange={handleInputChange}
-        />
-        <label htmlFor="password" className="sr-only">
-          Email
-        </label>
-        <input
-          type="password"
-          id="password"
-          placeholder="Password"
-          className="p-2 border"
-          value={inputData.password}
-          onChange={handleInputChange}
-        />
-        <label htmlFor="confirmPassword" className="sr-only">
-          Email
-        </label>
-        <input
-          type="text"
-          id="confirmPassword"
-          placeholder="Confirm Password"
-          className="p-2 border"
-          value={inputData.confirmPassword}
-          onChange={handleInputChange}
-        />
-        <button
-          type="submit"
-          className="bg-red-500 hover:bg-red-600 py-3 text-white disabled:bg-zinc-300"
-          disabled={
-            !inputData.email ||
-            !inputData.password ||
-            !inputData.confirmPassword
-          }
+      <div className="p-4 md:p-6">
+        <form
+          className="w-full *:w-full *:mb-5 *:rounded-lg *:outline-none"
+          onSubmit={signUpHandler}
         >
-          Create an account
-        </button>
-      </form>
-      <div className="h-[1px] w-full bg-zinc-200 relative">
-        <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 px-4 bg-white">
-          or
-        </span>
-      </div>
-      <button
-        className="w-full mt-[1rem] flex items-center justify-center gap-3 py-3 border rounded-lg"
-        onClick={handleSignUpWithGoogle}
-      >
-        <div className="w-4 h-4">
-          <img
-            src={googleSvg}
-            alt="google image"
-            className="w-full h-full object-contain object-center"
+          <label htmlFor="email" className="sr-only">
+            Email
+          </label>
+          <input
+            type="email"
+            id="email"
+            placeholder="Email"
+            className="p-2 border"
+            value={inputData.email}
+            onChange={handleInputChange}
           />
+          <label htmlFor="password" className="sr-only">
+            Email
+          </label>
+          <input
+            type="password"
+            id="password"
+            placeholder="Password"
+            className="p-2 border"
+            value={inputData.password}
+            onChange={handleInputChange}
+          />
+          <label htmlFor="confirmPassword" className="sr-only">
+            Email
+          </label>
+          <input
+            type="text"
+            id="confirmPassword"
+            placeholder="Confirm Password"
+            className="p-2 border"
+            value={inputData.confirmPassword}
+            onChange={handleInputChange}
+          />
+          <button
+            type="submit"
+            className="bg-red-500 hover:bg-red-600 py-3 text-white disabled:bg-zinc-300"
+            disabled={
+              !inputData.email ||
+              !inputData.password ||
+              !inputData.confirmPassword
+            }
+          >
+            Create an account
+          </button>
+        </form>
+        <div className="h-[1px] w-full bg-zinc-200 relative">
+          <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 px-4 bg-white">
+            or
+          </span>
         </div>
-        <p className="">Sign in with Google</p>
-      </button>
+        <button
+          className="w-full mt-[1rem] flex items-center justify-center gap-3 py-3 border rounded-lg"
+          onClick={handleSignUpWithGoogle}
+        >
+          <div className="w-4 h-4">
+            <img
+              src={googleSvg}
+              alt="google image"
+              className="w-full h-full object-contain object-center"
+            />
+          </div>
+          <p className="">Sign in with Google</p>
+        </button>
+      </div>
     </Dialog>
   );
 }
