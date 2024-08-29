@@ -24,7 +24,7 @@ function FilterBtn({
   }
 
   return (
-    <div className="flex items-center gap-3 mb-5">
+    <div className="flex flex-wrap items-center gap-3 mb-5">
       <button
         className="px-3 py-[6px] border border-zinc-300 rounded-lg flex space-x-2 items-center"
         onClick={() => {
@@ -42,6 +42,7 @@ function FilterBtn({
         <span>Filters</span>
       </button>
 
+      <div className="flex items-center gap-5">
       {!!correspondingSortCallback ? (
         <Button
           onClose={(e) => {
@@ -80,6 +81,7 @@ function FilterBtn({
           Chicken
         </button>
       )}
+      </div>
     </div>
   );
 }

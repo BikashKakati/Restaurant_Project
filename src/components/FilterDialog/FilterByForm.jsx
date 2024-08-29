@@ -28,7 +28,7 @@ const FilterByForm = ({
             onChange={handleFilterOptionChange}
             className="size-4 text-base"
           />
-          <label htmlFor={options}>{options}</label>
+          <label htmlFor={options} className="text-nowrap text-sm md:text-base">{options}</label>
         </div>
       ))}
     </form>

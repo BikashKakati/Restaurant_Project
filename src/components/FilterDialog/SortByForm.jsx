@@ -21,7 +21,7 @@ const SortByForm = ({setSelectedSortOption,selectedSortOption}) => {
             onChange={handleSortOptionChange}
             className="size-4"
           />
-          <label htmlFor={options.value}>{options.label}</label>
+          <label htmlFor={options.value} className="text-nowrap text-sm md:text-base">{options.label}</label>
         </div>
       ))}
     </form>

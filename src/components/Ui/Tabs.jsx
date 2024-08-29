@@ -13,7 +13,7 @@ const TabsComponent = ({
 
   return (
     <div className="flex flex-row h-full w-full">
-      <div className="h-full w-[8rem] bg-zinc-100">
+      <div className="h-full w-[4rem] md:w-[8rem] bg-zinc-100">
         <nav
           className="flex flex-col space-y-2 w-full"
           aria-label="Tabs"
@@ -34,15 +34,15 @@ const TabsComponent = ({
               key={index}
             >
               <span
-                className={`text-base font-medium text-nowrap`}
+                className={`text-xs md:text-base font-medium text-nowrap`}
               >
                 {tab.tabSectionName}
               </span>
               {!!selectedFilterOption && tab.tabSectionName === "Filter By" && (
-                <span className="text-red-500 text-sm">{selectedFilterOption}</span>
+                <span className="text-red-500 text-xs md:text-sm">{selectedFilterOption}</span>
               )}
               {!!selectedSortOption && tab.tabSectionName === "Sort By" && (
-                <span className="text-red-500 text-sm text-nowrap">{selectedSortOption.label}</span>
+                <span className="text-red-500 text-xs md:text-sm">{selectedSortOption.label}</span>
               )}
             </button>
           ))}
