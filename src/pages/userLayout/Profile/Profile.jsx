@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import Wrapper from '../../../components/Ui/Wrapper';
 import { handleLogOut } from '../../../services/redux/slices/authSlice';
 import profileImg from "../../../assets/profile.png";
+import toast from 'react-hot-toast';
 
 function Profile() {
     const {currentUser} = useSelector(state => state.auth);
@@ -16,11 +17,12 @@ function Profile() {
 
     function handleLogout() {
         dispatch(handleLogOut());
+        toast.success("Logout successfully");
         Navigate("/");
     }
 
     function handleEdit(){
-
+        alert("Working...");
     }
     return (
         <div className="w-full min-h-dvh pt-20">

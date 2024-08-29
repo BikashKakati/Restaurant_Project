@@ -13,7 +13,7 @@ const TabsComponent = ({
 
   return (
     <div className="flex flex-row h-full w-full">
-      <div className="h-full w-[4rem] md:w-[8rem] bg-zinc-100">
+      <div className="h-full w-[6rem] md:w-[8rem] bg-zinc-100">
         <nav
           className="flex flex-col space-y-2 w-full"
           aria-label="Tabs"
@@ -49,7 +49,7 @@ const TabsComponent = ({
         </nav>
       </div>
 
-      <div className="p-5 h-full flex-1 overflow-y-auto">
+      <div className="p-3 md:p-5 h-full flex-1 overflow-y-auto">
         {tabsData?.map((tab, index) => {
           return (
             activeTab === index && (

@@ -26,13 +26,13 @@ function FilterBtn({
   return (
     <div className="flex flex-wrap items-center gap-3 mb-5">
       <button
-        className="px-3 py-[6px] border border-zinc-300 rounded-lg flex space-x-2 items-center"
+        className="px-3 py-[6px] text-sm md:text-base border border-zinc-300 rounded-lg flex space-x-2 items-center"
         onClick={() => {
           setIsFilterDialogOpen(true);
         }}
       >
         {/* to showing the no. of filters otherwise filter icon */}
-        {!correspondingSortCallback ? (
+        {!correspondingSortCallback && !finalAddedFilter ? (
           <AdjustmentsHorizontalIcon className="h-4 w-4" />
         ) : (
           <span className="py-[2px] text-white px-2 bg-red-500 rounded-lg">
@@ -42,7 +42,7 @@ function FilterBtn({
         <span>Filters</span>
       </button>
 
-      <div className="flex items-center gap-5">
+      <div className="flex items-center gap-2 md:gap-5">
       {!!correspondingSortCallback ? (
         <Button
           onClose={(e) => {
@@ -57,7 +57,7 @@ function FilterBtn({
         //for default sort option
         <button
           onClick={handleDirectAddSort}
-          className="px-3 py-[6px] border border-zinc-300 rounded-lg flex space-x-2 items-center"
+          className="px-3 py-[6px] border text-sm md:text-base border-zinc-300 rounded-lg flex space-x-2 items-center"
         >
           {sortByOptions[0].label}
         </button>
