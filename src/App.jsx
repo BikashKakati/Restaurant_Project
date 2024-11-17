@@ -1,4 +1,4 @@
-import { Suspense, lazy, useEffect } from "react";
+import { Suspense, lazy, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Route, Routes } from "react-router-dom";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
@@ -22,18 +22,28 @@ import { getAllMeals } from "./services/redux/api/cartThunks";
 import Webcam from "react-webcam";
 import { useHandPoseContext } from "./context/MotionDetectProvider";
 import { handleGestureAction } from "./utils";
+import { Dialog } from "./components/Ui/Dialog";
+import goUpImg from "./assets/goup.png";
+import goDownImg from "./assets/godown.png";
+import selectImg from "./assets/select.png";
+import stopImg from "./assets/stop.png";
 
 function App() {
   const dispatch = useDispatch();
   const { currentUser, authModelOn } = useSelector((state) => state.auth);
   const { webcamRef, intervalRef, detectedPose, canvasRef } =
     useHandPoseContext();
+  const [isGestureNoticeOn, setIsGestureNoticeOn] = useState(false);
 
   useEffect(() => {
-    handleGestureAction(detectedPose, intervalRef);
+    if (detectedPose) {
+      handleGestureAction(detectedPose, intervalRef);
+    }
   }, [detectedPose]);
 
-  
+  useEffect(() => {
+    setIsGestureNoticeOn(true);
+  }, []);
 
   useEffect(() => {
     if (currentUser) {
@@ -49,13 +59,32 @@ function App() {
       <Modal>
         <Toaster position="top-right" />
       </Modal>
-      <div id="virtual-cursor" className="fixed w-6 h-6 bg-green-600 rounded-full pointer-events-none -trasnlate-x-1/2 -translate-y-1/2 z-50 shadow-lg"></div>
+      {isGestureNoticeOn && (
+        <Dialog
+          headerData={"Fun with AI"}
+          onCloseModel={() => {
+            setIsGestureNoticeOn(false);
+          }}
+        >
+          <ul className="px-10">
+            <PoseInstructionItmes title={"To Go Down"} subtitle={"Raise index finger"} img={goDownImg} alt={"go down image"}/>
+            <PoseInstructionItmes title={"To Go Up"} subtitle={"Raise index and middle finger together"} img={goUpImg} alt={"go up image"}/>
+            <PoseInstructionItmes title={"To Stop Scroll"} subtitle={"Fist without thumb"} img={stopImg} alt={"stop scrolling image"}/>
+            <PoseInstructionItmes title={"To click something"} subtitle={"Join index and thumb"} img={selectImg} alt={"click something image"}/>
+          </ul>
+        </Dialog>
+      )}
+      <div
+        id="virtual-cursor"
+        className="fixed w-6 h-6 bg-green-600 rounded-full pointer-events-none -trasnlate-x-1/2 -translate-y-1/2 z-50 shadow-lg"
+      ></div>
       <div>
         <Webcam
           ref={webcamRef}
           style={{
             position: "fixed",
             right: 0,
+            top:70,
             zIndex: 30,
             width: 340,
             height: 255,
@@ -67,6 +96,7 @@ function App() {
           style={{
             position: "fixed",
             right: 0,
+            top:70,
             zIndex: 30,
             width: 340,
             height: 255,
@@ -108,3 +138,20 @@ function App() {
   );
 }
 export default App;
+
+function PoseInstructionItmes({title, subtitle, img, alt}) {
+  return (
+    <li className="flex items-center my-2">
+      <div className="w-4 h-4 bg-red-500 rounded-full mr-5"></div>
+      <div>
+        <p className="text-lg font-semibold">{title}</p>
+        <p className="text-sm">{subtitle}</p>
+      </div>
+      <img
+        src={img}
+        alt={alt}
+        className="w-[4rem] object-cover object-center"
+      />
+    </li>
+  );
+}
