@@ -19,10 +19,21 @@ import Modal from "./components/Ui/Modal";
 import AuthDialog from "./pages/Log/AuthDialog";
 import UserLayout from "./pages/userLayout/UserLayout";
 import { getAllMeals } from "./services/redux/api/cartThunks";
+import Webcam from "react-webcam";
+import { useHandPoseContext } from "./context/MotionDetectProvider";
+import { handleGestureAction } from "./utils";
 
 function App() {
   const dispatch = useDispatch();
   const { currentUser, authModelOn } = useSelector((state) => state.auth);
+  const { webcamRef, intervalRef, detectedPose, canvasRef } =
+    useHandPoseContext();
+
+  useEffect(() => {
+    handleGestureAction(detectedPose, intervalRef);
+  }, [detectedPose]);
+
+  
 
   useEffect(() => {
     if (currentUser) {
@@ -38,6 +49,30 @@ function App() {
       <Modal>
         <Toaster position="top-right" />
       </Modal>
+      <div id="virtual-cursor" className="fixed w-6 h-6 bg-green-600 rounded-full pointer-events-none -trasnlate-x-1/2 -translate-y-1/2 z-50 shadow-lg"></div>
+      <div>
+        <Webcam
+          ref={webcamRef}
+          style={{
+            position: "fixed",
+            right: 0,
+            zIndex: 30,
+            width: 340,
+            height: 255,
+          }}
+        />
+
+        <canvas
+          ref={canvasRef}
+          style={{
+            position: "fixed",
+            right: 0,
+            zIndex: 30,
+            width: 340,
+            height: 255,
+          }}
+        />
+      </div>
 
       {<Modal>{authModelOn && <AuthDialog />}</Modal>}
 

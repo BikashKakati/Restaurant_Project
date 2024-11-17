@@ -2,67 +2,64 @@
 @tailwind components;
 @tailwind utilities;
 
-
 @layer components {
-    .bg-overlay {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.5);
-    }
+  .bg-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
 
-    .bg-nav {
-        background: rgba(0, 0, 0, .1);
-    }
+  .bg-nav {
+    background: rgba(0, 0, 0, 0.1);
+  }
 
-    .nav-hover {
-        background: rgba(236, 229, 229, 0.5);
-    }
+  .nav-hover {
+    background: rgba(236, 229, 229, 0.5);
+  }
 
-    .cart-icon-position {
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-    }
+  .cart-icon-position {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
 
-    .cart-container {
-        max-width: 40rem;
-        min-height: 28rem;
-    }
+  .cart-container {
+    max-width: 40rem;
+    min-height: 28rem;
+  }
 
-    .popup-animation {
-        animation: pop .5s ease-in-out;
-    }
+  .popup-animation {
+    animation: pop 0.5s ease-in-out;
+  }
 
-    @keyframes pop {
-        0% {
-            opacity: 0;
-            scale: 0;
-        }
+  @keyframes pop {
+    0% {
+      opacity: 0;
+      scale: 0;
     }
+  }
 }
 
-
 html,
-:root,
-body
+body ,
+#root,
 {
-    @apply h-full w-full;
+  @apply h-full w-full;
 }
 
 body {
-    @apply bg-zinc-50
+  @apply bg-zinc-50;
 }
 
-.swiper>.swiper-button-next,
-.swiper>.swiper-button-prev {
-    @apply p-6 bg-white rounded-full text-gray-800 text-sm shadow-lg !important;
+.swiper > .swiper-button-next,
+.swiper > .swiper-button-prev {
+  @apply p-6 bg-white rounded-full text-gray-800 text-sm shadow-lg !important;
 }
 
-.swiper>.swiper-button-next::after,
-.swiper>.swiper-button-prev::after
- {
-    @apply text-lg font-bold !important;
+.swiper > .swiper-button-next::after,
+.swiper > .swiper-button-prev::after {
+  @apply text-lg font-bold !important;
 }

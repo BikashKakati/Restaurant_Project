@@ -28,6 +28,7 @@ function FilterBtn({
       <button
         className="px-3 py-[6px] text-sm md:text-base border border-zinc-300 rounded-lg flex space-x-2 items-center"
         onClick={() => {
+          console.log("llllllll");
           setIsFilterDialogOpen(true);
         }}
       >
